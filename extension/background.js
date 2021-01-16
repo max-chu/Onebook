@@ -1,7 +1,7 @@
 let pageConditions = {
     conditions: [
         new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { schemes: ['https', 'http'] }
+            pageUrl: { }
         })
     ],
     actions: [new chrome.declarativeContent.ShowPageAction()]

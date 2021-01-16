@@ -8,7 +8,7 @@
         "persistent": false
     },
     "page_action": {
-        "default_popup": "popup/login/login.html"
+        "default_popup": "popup/contacts/contacts.html"
     },
     "permissions": ["tabs", "activeTab", "declarativeContent", "storage", "identity"],
     "oauth2": {
@@ -16,4 +16,3 @@
         "scopes": ["profile"]
     }
 }
-
