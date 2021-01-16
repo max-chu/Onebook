@@ -21,11 +21,15 @@ body {
     width: 300px;
 }
 
+
+/* Buttons */
+
 button {
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
     border: 3px solid;
     border-radius: 100px;
+    padding: 6px 14px;
 }
 
 button:hover {
@@ -34,7 +38,6 @@ button:hover {
 
 .btn-outline {
     color: #092C43;
-    padding: 8px 18px;
     background-color: #fff;
     border-color: #092C43;
 }
@@ -46,7 +49,6 @@ button:hover {
 
 .btn-fill {
     color: #fff;
-    padding: 8px 18px;
     background-color: #092C43;
     border-color: #092C43;
 }
