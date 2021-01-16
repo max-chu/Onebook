@@ -1,0 +1,19 @@
+{
+    "name": "OneBook",
+    "version": "0.0.1",
+    "description": "Social Media Organizer",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "page_action": {
+        "default_popup": "popup/login/login.html"
+    },
+    "permissions": ["tabs", "activeTab", "declarativeContent", "storage", "identity"],
+    "oauth2": {
+        "client_id": "93864762885-7nuqoutvqtrdctkl3kqbctpahl7ph4v0.apps.googleusercontent.com",
+        "scopes": ["profile"]
+    }
+}
+

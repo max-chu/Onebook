@@ -1,0 +1,14 @@
+.container {
+    height: 500px;
+    width: 300px;
+    text-align: center;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+.title {
+    margin-bottom: 50px;
+}
+
