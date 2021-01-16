@@ -15,5 +15,4 @@ const sequelize = new Sequelize('onebook', 'maxroach', '', {
               .toString()
       }
   },
-  
 });
