@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Material+Icons");
 
 /* @font-face {
     font-family: 'Roboto';
@@ -10,6 +11,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
 }
 
 .brand {
@@ -24,12 +26,18 @@ body {
 
 /* Buttons */
 
+input {
+    outline: none;
+}
+
 button {
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
     border: 3px solid;
     border-radius: 100px;
     padding: 6px 14px;
+
+    outline: none;
 }
 
 button:hover {
