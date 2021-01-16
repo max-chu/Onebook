@@ -20,9 +20,16 @@ app.get("/test", authParser, (req, res) => {
   res.send(req.email);
 });
 
+app.post("/import")
 
 app.post("/users", authParser, (req, res) => {
-
+  models.user.create({email: req.email})
+    .then(doc => {
+      res.send(doc.toJSON());
+    })
+    .catch(err => {
+      res.status(500).send({message: "Failed to insert"});
+    });
 });
 
 const PORT = process.env.PORT || 5000;
