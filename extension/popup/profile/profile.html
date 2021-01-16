@@ -1,21 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="contacts.css">
+        <link rel="stylesheet" href="profile.css">
     </head>
     <body>
         <div class="container">
 
-            <h1>Contact Profile</h1>
-
-            <div class="collapse-div">
-                <h3>General</h3>
-                <input text="Name"/>
+            <div>
+                <button id="back-button">Back</button>
+                <h1>Contact Profile</h1>
             </div>
 
 
+            <div class="collapse-div" id="general">
+                <h3>General</h3>
+                <!--input value="Name"/>
+                <input value="Notes"/-->
+            </div>
+
+            <div class="collapse-div" id ="tags">
+                <h3>Tags</h3>
+            </div>
+
+            <div class="collapse-div" id="socials">
+                <h3>Socials</h3>
+            </div>
 
         </div>
-        <script src="contacts.js"></script>
+        <script src="profile.js"></script>
     </body>
 </html>
