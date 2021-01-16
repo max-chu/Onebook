@@ -17,8 +17,9 @@ app.use(morgan("dev"));
 app.get("/ping", (req, res) => res.send("pong!"));
 
 app.get("/test", authParser, (req, res) => {
-  
+  res.send(req.email);
 });
+
 
 app.post("/users", authParser, (req, res) => {
 
