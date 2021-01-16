@@ -7,7 +7,8 @@
     /* margin-bottom: 0px; */
 }
 
-.vertical-center {
+.wrapper {
+    /* Vertically center */
     margin: 0;
     position: absolute;
     top: 50%;
@@ -21,4 +22,16 @@
 
 h3 {
     font-weight: 300;
+}
+
+.welcome {
+
+}
+
+.intro-buttons {
+    margin-top: 50px;
+}
+
+#contacts-button {
+    margin-top: 6px;
 }
