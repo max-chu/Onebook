@@ -106,3 +106,6 @@ dist
 node*/
 my-safe-directory 
 certs
+credentials.json
+
+.DS_Store
