@@ -21,6 +21,8 @@ app.get("/test", (req, res) => {
   });
 });
 
+app.post("/users")
+
 const PORT = process.env.PORT || 5000;
 
 sequelize.sync({force: true}).then(() => {
