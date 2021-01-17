@@ -6,6 +6,7 @@ const sequelize = require("./sequelize");
 const authParser = require("./middlewares/auth-parser");
 const { google } = require('googleapis');
 const contactFinder = require("./middlewares/contact-finder");
+const userFinder = require("./middlewares/user-finder");
 const { models } = sequelize;
 
 const app = express();
@@ -14,16 +15,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan("dev"));
+app.use(authParser, userFinder);
 
 app.get("/ping", (req, res) => res.send("pong!"));
 
-app.get("/test", authParser, (req, res) => {
-  res.send(req.email);
+app.get("/test", (req, res) => {
+  res.send(req.user);
 });
 
-app.post("/contacts", authParser, contactFinder, (req, res) => {
+app.post("/contacts", contactFinder, (req, res) => {
   Promise.all(req.toImport.map(obj => Promise.all([
-
+    models.
   ])))
     .then(docs => {
 
@@ -45,7 +47,7 @@ type
 */
 app.put('/me/friendships/:friendshipId')
 
-app.post("/me", authParser, (req, res) => {
+app.post("/me", (req, res) => {
   models.user.findOrCreate({where: {email: req.email}})
     .then(doc => {
       res.send(doc[0].toJSON());
