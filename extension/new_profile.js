@@ -227,8 +227,6 @@ function promptNewContact(){
 
     });
 
-    // noteNode.style.left = 0 + "px";
-    // noteNode.style.top = 10 + "px";
     var body = document.getElementsByTagName("body")[0];
     body.prepend(noteNode);
 }
