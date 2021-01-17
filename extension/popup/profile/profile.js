@@ -99,6 +99,10 @@ function init(){
             }
         ];
         updates.links = links;
+        let tags = document.getElementsByClassName("tag");
+        for(let tag of tags){
+            
+        }
 
 
         console.log(updates);
@@ -145,6 +149,19 @@ function init(){
         }
     });
 
+    document.getElementById("add-tag-button").addEventListener("click", (e) => {
+        e.preventDefault();
+        let tags = document.getElementById("tags-collapsible");
+        let div = document.createElement("div");
+        div.setAttribute("class", "input-section tag");
+        let input = document.createElement("input");
+        input.setAttribute("value", "");
+        input.setAttribute("type", "text");
+        div.appendChild(input);
+        tags.prepend(div);
+
+    });
+
 
     document.getElementById("profile-img").setAttribute("src", profile.avatar_url);
 
@@ -161,13 +178,17 @@ function init(){
     document.getElementById("input-tw").value = profile.links.find((account) => account.platform === "twitter").username;
     document.getElementById("input-ig").value = profile.links.find((account) => account.platform === "instagram").username;
 
-    let tagsList = document.getElementById("tags-list");
+    let tags = document.getElementById("tags-collapsible");
     for(let tag of profile.tags){
-        let li = document.createElement("li");
-        let node = document.createTextNode(tag);
-        li.appendChild(node);
-        tagsList.appendChild(li);
+        let div = document.createElement("div");
+        div.setAttribute("class", "input-section tag");
+        let input = document.createElement("input");
+        input.setAttribute("value", tag);
+        input.setAttribute("type", "text");
+        div.appendChild(input);
+        tags.prepend(div);
     }
+
 
 
 }
