@@ -1,19 +1,5 @@
 /* Navigation Bar */
 
-.nav {
-    margin: 0;
-    width: 100%;
-    height: 40px;
-    background-color: #092C43;
-    color: #8AB6D2;
-
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-
-    align-items: center;
-}
-
 input {
     font-family: 'Roboto', sans-serif;
 }
