@@ -45,7 +45,7 @@ function init() {
 // If the user existed in the book. Tell them that this contact is already in the contact list
 
 function displayContact(con) {
-  // var body = document.getElementsByTagName("body")[0];
+  var body = document.getElementsByTagName("body")[0];
   let noteNode = document.createElement("div");
   noteNode.setAttribute("id", "new-contact-message");
 
@@ -53,7 +53,7 @@ function displayContact(con) {
   let textNode = document.createTextNode("X");
   button.appendChild(textNode);
   noteNode.appendChild(button);
-  //  body.prepend(closeButtonContact);
+  body.prepend(button);
 
   let p = document.createElement("p");
   let closeDiv = document.createElement("div");
