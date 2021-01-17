@@ -1,22 +1,3 @@
-/*let profile = {
-    name: "Jack Noseworthy",
-    id: "1",
-    img: "",
-    company: "Carleton University",
-    email: "jack.a.noseworthy@gmail.com",
-    phonenum: "6135923666",
-    location: "Ottawa, ON",
-    birthday: "2001-11-13",
-    notes: "Notes",
-    tags: ["Cool", "BFF", "Vball Team", "CS Newb"],
-    socials: {
-        facebook: "www.facebook.com",
-        linkedin: "www.linkedin.com",
-        twitter: "www.twitter.com",
-        instagram: "www.instagram.com"
-    }
-}*/
-
 let editMode = false;
 
 let profile ={

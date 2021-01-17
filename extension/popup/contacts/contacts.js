@@ -19,9 +19,20 @@ const contacts = [
     },
 ];
 
+
 chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-    console.log(token);
-  });
+    fetch('http://localhost:5000/me/friendships', {
+        headers: {
+            authorization: "Bearer " + token
+        }
+    }).then(function(res){
+        return res.json();
+    }).then(function(res){
+        console.log(res);
+    })
+});
+
+
 
 init();
 

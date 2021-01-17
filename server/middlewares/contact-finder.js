@@ -20,6 +20,7 @@ module.exports = (req, res, next) => {
           nextPageToken = data.data.nextPageToken;
           req.toImport = concatData(req.toImport, data);
         }
+        console.log(req.toImport);
         next();
       });
   }
