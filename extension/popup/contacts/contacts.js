@@ -1,9 +1,15 @@
 const contacts = [
     {
-        "name": "Jack Noseworthy"
+        name: "Jack Noseworthy",
+        tags: ["second year", "frontend"]
     },
     {
-        "name": "Scott Langille",
+        name: "Scott Langille",
+        tags: ["ui/ux", "first year", "frontend"]
+    },
+    {
+        name: "Tom Zhu",
+        tags: ["backend", "second year"]
     }
 ];
 
@@ -13,10 +19,11 @@ const contacts = [
 
 init();
 
-const form = document.getElementById("search-form");
-form.addEventListener('submit', (e) => {
+const searchInput = document.getElementById("search-field");
+searchInput.addEventListener('input', (e) => {
     e.preventDefault();
-    displayContacts(contacts.filter((contact) => contact.name.toLowerCase().includes(form.search.value.toLowerCase())));
+    console.log(searchInput.value);
+    displayContacts(contacts.filter((contact) => (contact.name.toLowerCase().includes( searchInput.value.toLowerCase() ) ) || (contact.tags.find((tag) => tag.toLowerCase().includes(searchInput.value.toLowerCase()))) ) );
 
 });
 
