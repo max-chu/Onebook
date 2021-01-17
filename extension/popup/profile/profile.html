@@ -6,27 +6,170 @@
     </head>
     <body>
         <div class="container">
-
-            <div>
-                <button id="back-button">Back</button>
-                <h1>Contact Profile</h1>
+            <div class="nav1">
+                <div class="nav-left" style="margin-left: 2px">
+                    <div class="nav-item">
+                        <button id="back-button" class="nav-item"><i class="material-icons">clear</i></button>
+                    </div>
+                </div>
+                <div class="nav-center">
+                    <h1 class="brand" style="margin-top: 10px;">Edit Profile</h1>
+                </div>
+                <div class="nav-right">
+                    <div class="nav-item">
+                        <button id="save-button">SAVE</button>
+                    </div>
+                </div>
             </div>
 
+            <form id="profile-form" class="container">
+                <div class="collapse-div" id="general">
+                    <div class="section">
+                        <div class="nav-left">
+                            <div class="nav-item">
+                                <h2>General</h2>
+                            </div>
+                        </div>
+                        <div class="nav-right">
+                            <button id="collapse-1" class="collapse nav-item"><i class="material-icons">keyboard_arrow_down</i></button>
+                        </div>
+                    </div>
 
-            <div class="collapse-div" id="general">
-                <h3>General</h3>
-                <!--input value="Name"/>
-                <input value="Notes"/-->
-            </div>
+                    <div id="general-collapsible" class="collapsible">
+                        <div style="text-align: center; margin-bottom: 12px;">
+                            <img id="profile-img">
+                        </div>
 
-            <div class="collapse-div" id ="tags">
-                <h3>Tags</h3>
-            </div>
+                        <div class="input-section">
+                            <label>FULL NAME</label>
+                            <input id="input-name" type="text" name="name"/>
+                        </div>
 
-            <div class="collapse-div" id="socials">
-                <h3>Socials</h3>
-            </div>
+                        <div class="input-section">
+                            <label>PHONE NUMBER</label>
+                            <input id="input-phone" type="tel" name="phone"/>
+                        </div>
 
+                        <div class="input-section">
+                            <label>COMPANY</label>
+                            <input id="input-company" type="text" name="company"/>
+                        </div>
+
+                        <div class="input-section">
+                            <label>EMAIL ADDRESS</label>
+                            <input id="input-email" type="email" name="email"/>
+                        </div>
+
+                        <div class="input-section">
+                            <label>LOCATION</label>
+                            <input id="input-location" type="text" name="location"/>
+                        </div>
+
+                        <div class="input-section">
+                            <label>BIRTHDAY</label>
+                            <input id="input-birthday" type="date" name="birthday"/>
+                        </div>
+
+                        <div class="input-section">
+                            <label>NOTES</label>
+                            <textarea id="input-notes" cols="40" rows="5" name="notes"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapse-div" id="social">
+                    <div class="section">
+                        <div class="nav-left">
+                            <div class="nav-item">
+                                <h2>Social</h2>
+                            </div>
+                        </div>
+                        <div class="nav-right">
+                            <button id="collapse-2" class="collapse nav-item"><i class="material-icons">keyboard_arrow_down</i></button>
+                        </div>
+                    </div>
+
+                    <div id="social-collapsible" class="collapsible">
+                        <div class="input-section">
+                            <label>FACEBOOK</label>
+                            <input id="input-fb" type="text" name="fb"/>
+                        </div>
+                        <div class="input-section">
+                            <label>LINKEDIN</label>
+                            <input id="input-li" type="text" name="li"/>
+                        </div>    
+                        <div class="input-section">
+                            <label>TWITTER</label>
+                            <input id="input-tw" type="text" name="tw"/>
+                        </div>    
+                        <div class="input-section">
+                            <label>INSTAGRAM</label>
+                            <input id="input-ig" type="text" name="ig"/>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="collapse-div" id="tags">
+                    <div class="section">
+                        <div class="nav-left">
+                            <div class="nav-item">
+                                <h2>Tags</h2>
+                            </div>
+                        </div>
+                        <div class="nav-right">
+                            <button id="collapse-3" class="collapse nav-item"><i class="material-icons">keyboard_arrow_down</i></button>
+                        </div>
+                    </div>
+
+                    <div id="tags-collapsible" class="collapsible">
+
+                        <div id="tag-list">
+                            <div class="input-section tag">
+                                <input type="text" readonly="true"/>
+                                <input type="checkbox">
+                                <i class="material-icons delete-tag hidden">clear</i>
+                            </div>
+
+                            <div class="input-section tag">
+                                <input type="text" readonly="true"/>
+                                <input type="checkbox">
+                                <i class="material-icons delete-tag hidden">clear</i>
+                            </div>
+
+                            <div class="input-section tag">
+                                <input type="text" readonly="true"/>
+                                <input type="checkbox">
+                                <i class="material-icons delete-tag hidden">clear</i>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 12px; margin-top: 0;">
+                            <button id="add-tag-button" class="hidden">Add tag</button>
+                            <button id="edit-tags-button">Edit tags</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapse-div" id="settings">
+                    <div class="section">
+                        <div class="nav-left">
+                            <div class="nav-item">
+                                <h2>Settings</h2>
+                            </div>
+                        </div>
+                        <div class="nav-right">
+                            <button id="collapse-4" class="collapse nav-item"><i class="material-icons">keyboard_arrow_down</i></button>
+                        </div>
+                    </div>
+
+                    <div id="settings-collapsible" class="collapsible">
+                        <div style="text-align: center; margin-bottom: 12px; margin-top: 0;">
+                                <button id="delete-button">Delete Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <script src="profile.js"></script>
     </body>

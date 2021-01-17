@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Material+Icons");
 
+.material-icons {
+    font-family: 'Material Icons';
+}
+
 /* @font-face {
     font-family: 'Roboto';
     font-style: normal;
@@ -21,8 +25,37 @@ body {
 .container {
     height: 500px;
     width: 300px;
+    min-height: 500px;
+    min-width: 300px;
 }
 
+::-webkit-scrollbar {
+    width: 0px; /* No scrollbar */
+  }
+
+/* Nav - on some pages */
+
+.nav {
+    margin: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #092C43;
+    color: #8AB6D2;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    align-items: center;
+}
+
+.nav1 {
+    margin: 0;
+    height: 40px;
+    width: 100%;
+    background-color: #092C43;
+    color: #8AB6D2;
+}
 
 /* Buttons */
 
@@ -72,7 +105,30 @@ button:hover {
     border-color: #1877F2;
 }
 
+
 .btn-fb:hover {
     background-color: #146adb;
     border-color: #146adb;
+}
+
+.btn-go {
+    color: #fff;
+    /* background-color: #B31B1B;
+    border-color: #B31B1B; */
+
+    background-color: #678fa7;
+    border-color: #678fa7;
+}
+
+
+.btn-go:hover {
+    /* background-color: #a01717;
+    border-color: #a01717; */
+
+    background-color: #3F6F89;
+    border-color: #3F6F89;
+}
+
+.hidden {
+    display: none;
 }
