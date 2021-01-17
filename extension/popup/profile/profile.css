@@ -144,3 +144,17 @@ textarea {
     background: #cccccc; /* to be replaced by img */
     border: solid 0.5px #cccccc;
 }
+
+/* Settings */
+
+#delete-button {
+    padding: none;
+    background: none;
+    color: #D40000;
+}
+
+#delete-button:hover {
+    background-color: #ac0202;
+    border-color: #ac0202;
+    color: #ffffff;
+}
