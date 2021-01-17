@@ -39,20 +39,8 @@
     transition-timing-function: ease-in-out;
 }
 
-#new-contact-message :nth-child(1) {
+#new-contact-message > #close-button {
     justify-self: right;
-}
-
-
-#new-contact-message :nth-child(2) {
-    width: 128px;
-    height: 128px;
-    /* background-image: url("./assets/logo.svg");
-    background-repeat: no-repeat;
-    width: 128px;
-    height: auto;
-    margin: 0;
-    padding: 0; */
 }
 
 #new-contact-message > div > img {
@@ -66,7 +54,7 @@
     margin-bottom: 20px;
 }
 
-#new-contact-message > button {
+#new-button, #existing-button {
     font-family: 'Roboto', sans-serif;
     font-weight: 600;
     border: 3px solid;
@@ -77,8 +65,20 @@
     margin-bottom: 3px;
 }
 
-#new-contact-message > button:hover {
+#new-button:hover, #existing-button:hover {
     background-color: #092C43;
     border: 3px solid #092C43;
     color: #ffffff;
+}
+
+.list-name {
+    width: 100%;
+    border-radius: 6px;
+
+    font-size: 14px;
+    padding: 5px 0;
+}
+
+.list-name:hover {
+    background-color: #fafafa;
 }

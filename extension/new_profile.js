@@ -93,6 +93,7 @@ function promptNewContact() {
 
   let button = document.createElement("button");
   let closeDiv = document.createElement("div");
+  closeDiv.id = "close-button";
   let textNode = document.createTextNode("X");
   button.appendChild(textNode);
   closeDiv.appendChild(button);
@@ -159,6 +160,7 @@ function promptNewContact() {
 
   //Create a button
   let existingButton = document.createElement("button");
+  existingButton.id = "existing-button";
   //Create some text
   let existingText = document.createTextNode("Add to existing contact");
   //Create a div
@@ -174,10 +176,11 @@ function promptNewContact() {
     noteNode.innerHTML = "";
     for (let con of connections) {
       let button = document.createElement("button");
+      button.className = "list-name";
       let text = document.createTextNode(con.name);
       button.appendChild(text);
       noteNode.appendChild(button);
-      noteNode.appendChild(document.createElement("br"));
+    //   noteNode.appendChild(document.createElement("br"));
 
       button.addEventListener("click", function () {
         connections.find(
@@ -191,6 +194,7 @@ function promptNewContact() {
   // (create new contact) create new contact button element
 
   let newButton = document.createElement("button");
+  newButton.id = "new-button";
   let newText = document.createTextNode("Create new contact");
   let newDiv = document.createElement("div");
   newButton.appendChild(newText);
