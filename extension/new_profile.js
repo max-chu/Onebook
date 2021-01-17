@@ -95,9 +95,9 @@ function promptNewContact() {
 
   //***************** IF POP UP CONTAINER NOT SHOWING, COMMENT THIS OUT. JUST WONT HAVE THE IMAGE FOR NOW */
 
-  let existingDiv = document.createElement("div");
+  let imgDiv = document.createElement("div");
   let logo = document.createElement("img");
-  logo.appendChild(existingDiv);
+  logo.appendChild(imgDiv);
   noteNode.appendChild(logo);
 
   //********************************************************************************************************* */
