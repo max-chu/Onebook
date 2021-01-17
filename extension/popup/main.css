@@ -27,6 +27,10 @@ body {
     width: 300px;
 }
 
+::-webkit-scrollbar {
+    width: 0px; /* No scrollbar */
+  }
+
 /* Nav - on some pages */
 
 .nav {
@@ -45,7 +49,6 @@ body {
 
 .nav1 {
     margin: 0;
-    overflow: hidden;
     height: 40px;
     width: 100%;
     background-color: #092C43;

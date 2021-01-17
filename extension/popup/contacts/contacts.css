@@ -44,6 +44,8 @@ input {
     align-items: center;
 
     border-bottom: 1px solid #cccccc;
+    
+    cursor: pointer;
 }
 
 .contact-img {

@@ -3,6 +3,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .nav1 {
@@ -68,7 +69,7 @@ h1 {
     background-color: #DCDCDC;
     display: inline-block;
 
-    margin: 0;
+    margin-bottom: 8px;
     height: 26px;
     width: 100%;
 }
@@ -92,4 +93,54 @@ h2 {
     color: #656565;
     margin: 0;
     padding: 2px 8px;
+}
+
+.collapse-div {
+    width: 100%;
+}
+
+/* Profile */
+
+.input-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0px 0px 12px 0px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.input-section > label {
+    margin-left: 16px;
+    margin-right: 16px;
+
+    font-family: 'Roboto Slab', sans-serif;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: #0E3A57;
+}
+
+.input-section > input, textarea {
+    width: calc(100% - 32px);
+    max-width: 100%;
+    height: 2em;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: solid 0.5px #cccccc;
+
+    font-size: 1.15em;
+    letter-spacing: 0.04em;
+}
+
+textarea {
+    max-width: 100%;
+}
+
+/* General */
+
+#profile-img {
+    width: 64px;
+    height: 64px;
+    background: #cccccc; /* to be replaced by img */
+    border: solid 0.5px #cccccc;
 }
