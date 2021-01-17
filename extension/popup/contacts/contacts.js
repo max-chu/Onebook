@@ -2,20 +2,19 @@ const contacts = [
     {
         name: "Jack Noseworthy",
         tags: ["second year", "frontend"],
-        id: "1"
+        id: "1",
+        avatar_url: "https://media-exp1.licdn.com/dms/image/C5603AQFWejZd3v__Ag/profile-displayphoto-shrink_400_400/0/1599081448212?e=1616630400&v=beta&t=IdUpQ3T-ngzPeMC1N-ECKwFaHxwtliQdLoTBXT1FG0Y",
     },
     {
         name: "Scott Langille",
         tags: ["ui/ux", "first year", "frontend"],
-        id: "2"
+        id: "2",
+        avatar_url: "https://media-exp1.licdn.com/dms/image/C5603AQHP3qwKwMsDAg/profile-displayphoto-shrink_400_400/0/1605405507271?e=1616630400&v=beta&t=07e7PMRaRg4Nd1xSaP3W_H_BAK_q74q_3tGzwFV6VHM",
     },
     {
         name: "Tom Zhu",
-        tags: ["backend", "second year"]
-    },
-    {
-        name: "Max Chu",
-        tags: ["backend", "first year"]
+        tags: ["backend", "second year"],
+        avatar_url: "https://media-exp1.licdn.com/dms/image/C4E03AQEilcvEoANsJw/profile-displayphoto-shrink_400_400/0/1593458448493?e=1616630400&v=beta&t=yaOQX8__i47ejVVF914DBJw9rvAe-Cc9mzVc-V_4AVE",
     },
 ];
 
@@ -63,7 +62,9 @@ function displayContacts(con){
         });
 
         let profilePic = document.createElement("img");
-        profilePic.setAttribute("src", "");
+        profilePic.setAttribute("src", contact.avatar_url);
+        profilePic.width = "44";
+        profilePic.height = "44";
         let picDiv = document.createElement("div");
         picDiv.setAttribute("class", "contact-img");
         picDiv.appendChild(profilePic);

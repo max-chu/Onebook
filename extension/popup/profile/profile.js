@@ -25,7 +25,7 @@ let profile ={
     birthday: "2001-11-13",
     company: "Carleton University", 
     location: "Ottawa, ON",
-    avatar_url: "", 
+    avatar_url: "https://media-exp1.licdn.com/dms/image/C5603AQFWejZd3v__Ag/profile-displayphoto-shrink_400_400/0/1599081448212?e=1616630400&v=beta&t=IdUpQ3T-ngzPeMC1N-ECKwFaHxwtliQdLoTBXT1FG0Y", 
     notes: "Notes",
     links: [
         {
