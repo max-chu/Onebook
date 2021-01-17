@@ -43,6 +43,12 @@ init();
 
 function init(){
 
+    for(let tag of document.getElementsByClassName("tag")){
+        tag.getElementsByTagName("i")[0].addEventListener("click", (e) => {
+            tag.parentElement.removeChild(tag);
+        });
+    }
+
     document.getElementById("back-button").addEventListener("click", function(){
         location.href = "../contacts/contacts.html"
     });
@@ -153,8 +159,8 @@ function init(){
         let clear = document.createTextNode("clear");
         i.appendChild(clear);
 
-        clear.addEventListener("click", function(){
-            // delete tag
+        i.addEventListener("click", function(){
+            div.parentNode.removeChild(div);
         });
 
         div.appendChild(input);
@@ -211,17 +217,25 @@ function init(){
     document.getElementById("input-tw").value = profile.links.find((account) => account.platform === "twitter").username;
     document.getElementById("input-ig").value = profile.links.find((account) => account.platform === "instagram").username;
 
-    /*let tags = document.getElementById("tags-collapsible");
+    let tags = document.getElementById("tag-list");
     for(let tag of profile.tags){
         let div = document.createElement("div");
         div.setAttribute("class", "input-section tag");
         let input = document.createElement("input");
         input.setAttribute("value", tag);
         input.setAttribute("type", "text");
+        input.readOnly = true;
+        let check = document.createElement("input");
+        check.setAttribute("type", "checkbox");
+        check.checked = true;
+        let i = document.createElement("i");
+        i.setAttribute("class", "material-icons delete-tag hidden");
+        let node = document.createTextNode("clear");
+        i.appendChild(node);
         div.appendChild(input);
-        tags.prepend(div);
-    }*/
-
-
+        div.appendChild(check);
+        div.appendChild(i);
+        tags.appendChild(div);
+    }
 
 }
