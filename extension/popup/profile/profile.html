@@ -6,24 +6,23 @@
     </head>
     <body>
         <div class="container">
-            <form id="profile-form">
-
-                <div class="nav1">
-                    <div class="nav-left" style="margin-left: 2px">
-                        <div class="nav-item">
-                            <button id="back-button" class="nav-item"><i class="material-icons">clear</i></button>
-                        </div>
-                    </div>
-                    <div class="nav-center">
-                        <h1 class="brand" style="margin-top: 10px;">Edit Profile</h1>
-                    </div>
-                    <div class="nav-right">
-                        <div class="nav-item">
-                            <button id="save-button">SAVE</button>
-                        </div>
+            <div class="nav1">
+                <div class="nav-left" style="margin-left: 2px">
+                    <div class="nav-item">
+                        <button id="back-button" class="nav-item"><i class="material-icons">clear</i></button>
                     </div>
                 </div>
+                <div class="nav-center">
+                    <h1 class="brand" style="margin-top: 10px;">Edit Profile</h1>
+                </div>
+                <div class="nav-right">
+                    <div class="nav-item">
+                        <button id="save-button">SAVE</button>
+                    </div>
+                </div>
+            </div>
 
+            <form id="profile-form" class="container">
                 <div class="collapse-div" id="general">
                     <div class="section">
                         <div class="nav-left">
@@ -36,8 +35,7 @@
                         </div>
                     </div>
 
-                    <div id="general-collapsible">
-
+                    <div id="general-collapsible" class="collapsible">
                         <div style="text-align: center; margin-bottom: 12px;">
                             <img id="profile-img">
                         </div>
@@ -76,9 +74,7 @@
                             <label>NOTES</label>
                             <textarea id="input-notes" cols="40" rows="5" name="notes"></textarea>
                         </div>
-                
                     </div>
-
                 </div>
 
                 <div class="collapse-div" id="social">
@@ -93,8 +89,7 @@
                         </div>
                     </div>
 
-                    <div id="social-collapsible">
-
+                    <div id="social-collapsible" class="collapsible">
                         <div class="input-section">
                             <label>FACEBOOK</label>
                             <input id="input-fb" type="text" name="fb"/>
@@ -127,13 +122,31 @@
                         </div>
                     </div>
 
-                    <div id="tags-collapsible">
+                    <div id="tags-collapsible" class="collapsible">
                         <ul id="tags-list">
 
                         </ul>
-                    </div>
 
-                    
+                        <div class="input-section tag">
+                            <input type="text"/>
+                            <input type="checkbox">
+                        </div>
+
+                        <div class="input-section tag">
+                            <input type="text"/>
+                            <input type="checkbox">
+                        </div>
+
+                        <div class="input-section tag">
+                            <input type="text"/>
+                            <input type="checkbox">
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 12px; margin-top: 0;">
+                            <button id="add-tag-button">Add tag</button>
+                            <button id="edit-tags-button">Edit tags</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="collapse-div" id="settings">
@@ -147,14 +160,14 @@
                             <button id="collapse-3" class="collapse nav-item"><i class="material-icons">keyboard_arrow_down</i></button>
                         </div>
                     </div>
-                    
-                    <div style="text-align: center; margin-bottom: 12px; margin-top: 0;">
-                            <button id="delete-button">Delete Contact</button>
-                            <!-- <p id="delete-button">Delete Contact</p> -->
+
+                    <div id="settings-collapsible" class="collapsible">
+                        <div style="text-align: center; margin-bottom: 12px; margin-top: 0;">
+                                <button id="delete-button">Delete Contact</button>
+                        </div>
                     </div>
                 </div>
             </form>
-
         </div>
         <script src="profile.js"></script>
     </body>

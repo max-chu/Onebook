@@ -69,7 +69,7 @@ h1 {
     background-color: #DCDCDC;
     display: inline-block;
 
-    margin-bottom: 8px;
+    margin: 0;
     height: 26px;
     width: 100%;
 }
@@ -97,6 +97,10 @@ h2 {
 
 .collapse-div {
     width: 100%;
+}
+
+.collapsible {
+    margin-top: 8px;
 }
 
 /* Profile */
@@ -152,6 +156,49 @@ h2 {
     height: 64px;
     background: #cccccc; /* to be replaced by img */
     border: solid 0.5px #cccccc;
+}
+
+/* Tags */
+
+li {
+    list-style-type: none;
+    margin: 0;
+}
+
+.tag {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+input[type="checkbox"] {
+    position: absolute;
+    width: fit-content;
+    right: 0;
+    margin-right: 12px;
+}
+
+#add-tag-button {
+    margin-top: 12px;
+    background-color: #ffffff;
+}
+
+#add-tag-button:hover {
+    background-color: #8AB6D2;
+    border-color: #8AB6D2;
+    color: #ffffff;
+}
+
+#edit-tags-button {
+    margin-top: 12px;
+    border-color: #3F6F89;
+    background-color: #ffffff;
+    color: #3F6F89;
+}
+
+#edit-tags-button:hover {
+    background-color: #3F6F89;
+    border-color: #3F6F89;
+    color: #202020;
 }
 
 /* Settings */
