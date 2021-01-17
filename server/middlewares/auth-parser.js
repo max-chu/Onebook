@@ -29,7 +29,7 @@ module.exports = (req, res, next) => {
           }
         })
         .catch(err => {
-          console.log(process.env.API_KEY);
+          console.log(err);
           res.status(500).send({message: "Failed to query google api"});
         });
     }

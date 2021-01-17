@@ -23,17 +23,55 @@ app.get("/test", (req, res) => {
   res.send(req.user);
 });
 
-app.post("/contacts", contactFinder, (req, res) => {
-  Promise.all(req.toImport.map(obj => Promise.all([
-    models.
-  ])))
-    .then(docs => {
+const sendContact = (req, res) => {
+  models.friendship.findOne()
+}
 
+const sendContacts = (req, res) => {
+  models.friendship.findAll({
+    where: {userId: req.user.id},
+    // include: [models.link, models.phonenum, models.address, models.tag,],
+  })
+    .then(docs => {
+      docs = docs.map(doc => doc.toJSON());
+      console.log(docs);
+      res.send(docs);
     })
     .catch(err => {
-      req.status(500).send({message: "Failed to insert"});
+      console.log(err);
+      res.status(500).send({message: "Failed to query"});
+    });
+}
+
+app.post("/contacts", contactFinder, (req, res, next) => {
+  Promise.all(req.toImport.map(async ({phoneNumber, first_name, last_name, email, notes}) => {
+    const {id: friendshipId} = await models.friendship.create({
+      userId: req.user.id,
+      first_name,
+      last_name,
+      notes
+    });
+
+    await Promise.all([
+      models.link.create({
+        friendshipId,
+        platform: 'gmail',
+        username: email.value,
+      }),
+      models.phonenum.create({
+        friendshipId,
+        phone_num: phoneNumber.value
+      })
+    ])
+  }))
+    .then(docs => {
+      next();
     })
-});
+    .catch(err => {
+      console.log(err);
+      res.status(500).send({message: "Failed to insert"});
+    });
+}, sendContacts);
 
 app.post("/me/friendships")
 
@@ -59,6 +97,6 @@ app.post("/me", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-sequelize.sync(/* {force: true} */).then(() => {
+sequelize.sync({force: true}).then(() => {
   app.listen(PORT, () => console.log("Running on port " + PORT));
-});
+}).catch(() => console.log("hello"));
