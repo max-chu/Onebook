@@ -99,6 +99,7 @@ app.post("/me/friendships", (req, res, next) => {
     birthday,
     company,
     location,
+    userId: req.user.id
   })
     .then((friendship) => {
       const {id: friendshipId} = friendship; 
@@ -119,22 +120,10 @@ app.post("/me/friendships", (req, res, next) => {
           Promise.all(docs.map(docu => docu.destroy()))
             .then(() => {
               const saveTags = Promise.all(tags.map(tag => {
-                return model.tag.create({tag_name: tag, friendshipId});
+                return models.tag.create({tag_name: tag, friendshipId});
               }))
               
-              const savePhonenum = phoneNumber && new Promise((resolve) => {
-                models.phonenum.find({friendshipId, phone_num, phoneNumber}).then(([phoneNum, created]) => {
-                  if (!created) {
-                    phoneNum.phone_num = phoneNumber;
-                    phoneNum.save()
-                      .then(() => {
-                        resolve();
-                      });
-                  } else {
-                    resolve();
-                  }
-                });
-              })
+              const savePhonenum = phoneNumber && models.phonenum.create({friendshipId, phone_num: phoneNumber});
     
               Promise.all([
                 saveSocials,
@@ -165,7 +154,7 @@ app.post("/me/friendships", (req, res, next) => {
 app.get("/me/friendships", sendContacts);
 
 app.param("friendshipId", (req, res, next) => {
-  model.friendship.findOne({where: {id: req.params.friendshipId}})
+  models.friendship.findOne({where: {id: req.params.friendshipId}})
     .then(doc => {
       req.friendship = doc;
       next();
@@ -190,22 +179,28 @@ app.put('/me/friendships/:friendshipId', (req, res, next) => {
   req.friendship.location = location;
   const saveFriendship = req.friendship.save();
 
-  const saveSocials = links.map(({platform, username}) => {
-    return models.link.upsert({platform, username});
-  });
+  const saveSocials = Promise.all(links.map(async ({platform, username}) => {
+    const found = await models.link.findOne({platform, friendshipId: req.params.friendshipId});
+    if (found) {
+      found.username = username;
+      await found.save();
+    } else {
+      await models.link.create({platform, friendshipId: req.params.friendshipId, username});
+    }
+  }));
 
   models.tag.findAll({where: {friendshipId: req.params.friendshipId}})
     .then(docs => {
       Promise.all(docs.map(docu => docu.destroy()))
         .then(() => {
           const saveTags = Promise.all(tags.map(tag => {
-            return model.tag.create({tag_name: tag, friendshipId: req.params.friendshipId});
+            return models.tag.create({tag_name: tag, friendshipId: req.params.friendshipId});
           }))
           
           const savePhonenum = new Promise((resolve) => {
-            models.phonenum.findOrCreate({where: {friendshipId}}).then(([phoneNum, created]) => {
+            models.phonenum.findOrCreate({where: {friendshipId: req.params.friendshipId}}).then(([phoneNum, created]) => {
               if (!created) {
-                phoneNum.phone_num = phoneNumber;
+                phoneNum.phonenum = phoneNumber;
                 phoneNum.save()
                   .then(() => {
                     resolve();
