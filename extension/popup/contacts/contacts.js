@@ -1,15 +1,18 @@
 const contacts = [
     {
         name: "Jack Noseworthy",
-        tags: ["second year", "frontend"]
+        tags: ["second year", "frontend"],
+        id: "1"
     },
     {
         name: "Scott Langille",
-        tags: ["ui/ux", "first year", "frontend"]
+        tags: ["ui/ux", "first year", "frontend"],
+        id: "2"
     },
     {
         name: "Tom Zhu",
-        tags: ["backend", "second year"]
+        tags: ["backend", "second year"],
+        id: "3"
     }
 ];
 
@@ -24,7 +27,6 @@ searchInput.addEventListener('input', (e) => {
     e.preventDefault();
     console.log(searchInput.value);
     displayContacts(contacts.filter((contact) => (contact.name.toLowerCase().includes( searchInput.value.toLowerCase() ) ) || (contact.tags.find((tag) => tag.toLowerCase().includes(searchInput.value.toLowerCase()))) ) );
-
 });
 
 const addButton = document.getElementById("add-contact");
@@ -50,7 +52,7 @@ function displayContacts(con){
         div.appendChild(node);
 
         div.addEventListener("click", function(){
-            document.location.href = "../profile/profile.html";
+            window.location.href = "../profile/profile.html?contact="+contact.id;
         });
 
         let profilePic = document.createElement("img");
