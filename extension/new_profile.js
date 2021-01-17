@@ -1,3 +1,4 @@
+// temp connection values
 let connections = [
   {
     name: "Jack Noseworthy",
@@ -51,7 +52,7 @@ function displayContact(con) {
     noteNode.setAttribute("class", "htn-sticky-note-class");
 
     let button = document.createElement("button");
-    let textNode = document.createTextNode("Close");
+    let textNode = document.createTextNode("X");
     button.appendChild(textNode);
     noteNode.appendChild(button);
     body.prepend(noteNode);
@@ -88,20 +89,23 @@ function promptNewContact() {
   noteNode.setAttribute("id", "new-contact-message");
   // noteNode.setAttribute("class", "htn-sticky-note-class");
 
-  let button = document.createElement("button");
-  let textNode = document.createTextNode("Close");
-  button.appendChild(textNode);
-  noteNode.appendChild(button);
+  // (create new contact) the close X button
 
-  //***************** IF POP UP CONTAINER NOT SHOWING, COMMENT THIS OUT. JUST WONT HAVE THE IMAGE FOR NOW */
+  let button = document.createElement("button");
+  let closeDiv = document.createElement("div");
+  let textNode = document.createTextNode("X");
+  button.appendChild(textNode);
+  closeDiv.appendChild(button);
+  noteNode.appendChild(closeDiv);
+
+  // (create new contact) image element
 
   let imgDiv = document.createElement("div");
   let logo = document.createElement("img");
   logo.appendChild(imgDiv);
   noteNode.appendChild(logo);
 
-  //********************************************************************************************************* */
-
+  // if the button/X is clicked, then close the whole pop-up
   button.addEventListener("click", function () {
     noteNode.remove();
   });
@@ -143,12 +147,12 @@ function promptNewContact() {
     noteNode.appendChild(p);
   }
 
-  // button for selecting a new contact
+  // (create new contact) add to existing contact button element
 
   //Create a button
   let existingButton = document.createElement("button");
   //Create some text
-  let existingText = document.createTextNode("Select an Existing Contact");
+  let existingText = document.createTextNode("Add to existing contact");
   //Create a div
   let existingDiv = document.createElement("div");
   //Put the text in the button
@@ -176,10 +180,10 @@ function promptNewContact() {
     }
   });
 
-  // button for creating new contact
+  // (create new contact) create new contact button element
 
   let newButton = document.createElement("button");
-  let newText = document.createTextNode("Create New Contact");
+  let newText = document.createTextNode("Create new contact");
   let newDiv = document.createElement("div");
   newButton.appendChild(newText);
   newDiv.appendChild(newButton);
