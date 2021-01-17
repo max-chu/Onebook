@@ -17,6 +17,8 @@
     }
 }*/
 
+let editMode = false;
+
 let profile ={
     first_name: "Jack",
     last_name: "Noseworthy",
@@ -99,10 +101,15 @@ function init(){
             }
         ];
         updates.links = links;
-        let tags = document.getElementsByClassName("tag");
-        for(let tag of tags){
-            
+        let tags = [];
+        let tagList = document.getElementsByClassName("tag");
+        for(let tag of tagList){
+            if(tag.getElementsByTagName("input")[1].checked){
+                tags.push(tag.getElementsByTagName("input")[0].value);
+            }
         }
+        updates.tags = tags;
+
 
 
         console.log(updates);
@@ -114,7 +121,6 @@ function init(){
 
     document.getElementById("collapse-1").addEventListener("click", (e) => {
         e.preventDefault();
-        console.log(document.getElementById("general-collapsible").classList.value);
         if(document.getElementById("general-collapsible").classList.value.includes("hidden")){
             document.getElementById("general-collapsible").classList.remove("hidden");
         }else{
@@ -151,14 +157,56 @@ function init(){
 
     document.getElementById("add-tag-button").addEventListener("click", (e) => {
         e.preventDefault();
-        let tags = document.getElementById("tags-collapsible");
+        let tags = document.getElementById("tag-list");
         let div = document.createElement("div");
         div.setAttribute("class", "input-section tag");
         let input = document.createElement("input");
+        input.readOnly = false;
         input.setAttribute("value", "");
         input.setAttribute("type", "text");
+        let check = document.createElement("input");
+        check.setAttribute("type", "checkbox");
+        check.setAttribute("class", "hidden");
+        let i = document.createElement("i");
+        i.setAttribute("class", "material-icons delete-tag");
+        let clear = document.createTextNode("clear");
+        i.appendChild(clear);
+
         div.appendChild(input);
-        tags.prepend(div);
+        div.appendChild(check);
+        div.appendChild(i);
+        tags.appendChild(div);
+
+    });
+
+    document.getElementById("edit-tags-button").addEventListener("click", (e) => {
+        e.preventDefault();
+        if(editMode){
+            document.getElementById("edit-tags-button").innerHTML = "";
+            let node = document.createTextNode("Edit tags");
+            document.getElementById("edit-tags-button").appendChild(node);
+            document.getElementById("add-tag-button").classList.add("hidden");
+            for(let el of document.getElementsByClassName("tag")){
+                el.getElementsByTagName("input")[0].readOnly=true;
+                el.getElementsByTagName("input")[1].classList.remove("hidden");
+            }
+            for(let el of document.getElementsByClassName("delete-tag")){
+                el.classList.add("hidden");
+            }
+        }else{
+            document.getElementById("add-tag-button").classList.remove("hidden");
+            document.getElementById("edit-tags-button").innerHTML = "";
+            let node = document.createTextNode("Use tags");
+            document.getElementById("edit-tags-button").appendChild(node);
+            for(let el of document.getElementsByClassName("tag")){
+                el.getElementsByTagName("input")[0].readOnly=false;
+                el.getElementsByTagName("input")[1].setAttribute("class", "hidden");
+            }
+            for(let el of document.getElementsByClassName("delete-tag")){
+                el.classList.remove("hidden");
+            }
+        }
+        editMode = !editMode;
 
     });
 
@@ -178,7 +226,7 @@ function init(){
     document.getElementById("input-tw").value = profile.links.find((account) => account.platform === "twitter").username;
     document.getElementById("input-ig").value = profile.links.find((account) => account.platform === "instagram").username;
 
-    let tags = document.getElementById("tags-collapsible");
+    /*let tags = document.getElementById("tags-collapsible");
     for(let tag of profile.tags){
         let div = document.createElement("div");
         div.setAttribute("class", "input-section tag");
@@ -187,7 +235,7 @@ function init(){
         input.setAttribute("type", "text");
         div.appendChild(input);
         tags.prepend(div);
-    }
+    }*/
 
 
 
