@@ -24,7 +24,17 @@ app.get("/test", (req, res) => {
 });
 
 const sendContact = (req, res) => {
-  models.friendship.findOne()
+  models.friendship.findOne({
+    where: {id: req.params.friendshipId},
+    include: [models.link, models.phonenum, models.address, models.tag,],
+  })
+    .then(doc => {
+      console.log(doc);
+      res.send(doc.toJSON());
+    })
+    .catch(err => {
+      console.log(err);
+    })
 }
 
 const sendContacts = (req, res) => {
@@ -43,7 +53,7 @@ const sendContacts = (req, res) => {
     });
 }
 
-app.post("/contacts", contactFinder, (req, res, next) => {
+app.post("/me/contacts", contactFinder, (req, res, next) => {
   Promise.all(req.toImport.map(async ({phoneNumber, first_name, last_name, email, notes}) => {
     const {id: friendshipId} = await models.friendship.create({
       userId: req.user.id,
@@ -53,12 +63,12 @@ app.post("/contacts", contactFinder, (req, res, next) => {
     });
 
     await Promise.all([
-      models.link.create({
+      email && models.link.create({
         friendshipId,
         platform: 'gmail',
         username: email.value,
       }),
-      models.phonenum.create({
+      phoneNumber && models.phonenum.create({
         friendshipId,
         phone_num: phoneNumber.value
       })
@@ -73,11 +83,39 @@ app.post("/contacts", contactFinder, (req, res, next) => {
     });
 }, sendContacts);
 
-app.post("/me/friendships")
+const insertFriend = async ({phoneNumber, first_name, last_name, email, notes}) => {
+  const {id: friendshipId} = await models.friendship.create({
+    userId: req.user.id,
+    first_name,
+    last_name,
+    notes
+  });
 
-app.get("/me/friendships")
+  await Promise.all([
+    email && models.link.create({
+      friendshipId,
+      platform: 'gmail',
+      username: email.value,
+    }),
+    phoneNumber && models.phonenum.create({
+      friendshipId,
+      phone_num: phoneNumber.value
+    })
+  ])
+};
 
-app.post('/me/friendships/:friendshipId')
+const updateParser = 
+
+app.post("/me/friendships", (req, res) => {
+  const {firstName, lastName, email, notes, phoneNumber, }
+  insertFriend({req.})
+})
+
+app.get("/me/friendships", sendContacts);
+
+app.get('/me/friendships/:friendshipId', sendContact);
+app.put('/me/friendships/:friendshipId', sendContact);
+app.delete('/me/friendships/:friendshipId', )
 
 /* query params: 
 field - friendship, tag, link, relation, link, phonenum, address
@@ -85,18 +123,10 @@ type
 */
 app.put('/me/friendships/:friendshipId')
 
-app.post("/me", (req, res) => {
-  models.user.findOrCreate({where: {email: req.email}})
-    .then(doc => {
-      res.send(doc[0].toJSON());
-    })
-    .catch(err => {
-      res.status(500).send({message: "Failed to insert"});
-    });
-});
+app.get("/me", (req, res) => res.send(req.user.toJSON()));
 
 const PORT = process.env.PORT || 5000;
 
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({force: false}).then(() => {
   app.listen(PORT, () => console.log("Running on port " + PORT));
 }).catch(() => console.log("hello"));
