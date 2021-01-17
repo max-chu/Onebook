@@ -18,7 +18,7 @@ let connections = [
     name: "Tom Zhu",
     notes: "",
     socials: {
-      linkedIn: "https://www.linkedin.com/in/zhu-tom/",
+      /*   linkedIn: "https://www.linkedin.com/in/zhu-tom/", */
     },
   },
 ];
@@ -42,18 +42,18 @@ function init() {
   }
 }
 
-// If the user existed in the book. Pop up that shows their name and linkedin url
+// If the user existed in the book. Tell them that this contact is already in the contact list
 
 function displayContact(con) {
-  var body = document.getElementsByTagName("body")[0];
-  var noteNode = document.createElement("div");
+  // var body = document.getElementsByTagName("body")[0];
+  let noteNode = document.createElement("div");
   noteNode.setAttribute("id", "new-contact-message");
 
   let button = document.createElement("button");
   let textNode = document.createTextNode("X");
   button.appendChild(textNode);
   noteNode.appendChild(button);
-  body.prepend(noteNode);
+  //  body.prepend(closeButtonContact);
 
   let p = document.createElement("p");
   let closeDiv = document.createElement("div");
@@ -79,6 +79,8 @@ function promptNewContact() {
   let name = document
     .getElementsByClassName("inline t-24 t-black t-normal break-words")[0]
     .textContent.trim();
+
+  let profilePicLink = document.getElementById("ember64").src;
 
   //checks if the full name equals to a name already in the database
 
