@@ -102,8 +102,16 @@ function promptNewContact() {
 
   let imgDiv = document.createElement("div");
   let logo = document.createElement("img");
-  logo.appendChild(imgDiv);
-  noteNode.appendChild(logo);
+  logo.src = chrome.runtime.getURL("assets/logo.svg");
+  logo.width = 100;
+  logo.height = 100;
+
+//   imgDiv.width = 100 + "px";
+//   imgDiv.height = 100 + "px";
+//   imgDiv.getAttribute("background-image") = chrome.runtime.getURL("assets/logo.svg");
+
+//   imgDiv.appendChild(logo);
+//   noteNode.appendChild(imgDiv);
 
   // if the button/X is clicked, then close the whole pop-up
   button.addEventListener("click", function () {
@@ -158,9 +166,9 @@ function promptNewContact() {
   //Put the text in the button
   existingButton.appendChild(existingText);
   //Put the button in the div
-  existingDiv.appendChild(existingButton);
+//   existingDiv.appendChild(existingButton);
   //Put the div on the page
-  noteNode.appendChild(existingDiv);
+  noteNode.appendChild(existingButton);
 
   existingButton.addEventListener("click", function () {
     noteNode.innerHTML = "";
