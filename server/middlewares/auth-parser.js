@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
     res.status(400).send({message: "Missing authorization header"});
   } else {
     auth = auth.split(" ");
-    console.log(auth);
     if (auth.length !== 2) {
       res.status(400).send({message: "Authorization header should be formatted 'Bearer token'"});
     } else {
@@ -19,7 +18,6 @@ module.exports = (req, res, next) => {
         }
       })
         .then(response => {
-          console.log(response);
           const { value } = response.data.emailAddresses.find(email => email.metadata.primary);
           if (value) {
             req.email = value;

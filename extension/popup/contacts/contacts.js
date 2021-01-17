@@ -1,4 +1,4 @@
-const contacts = [
+let contacts = [
     {
         name: "Jack Noseworthy",
         tags: ["second year", "frontend"],
@@ -28,13 +28,12 @@ chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
     }).then(function(res){
         return res.json();
     }).then(function(res){
+        contacts = res;
         console.log(res);
+        init();
     })
 });
 
-
-
-init();
 
 const searchInput = document.getElementById("search-field");
 searchInput.addEventListener('input', (e) => {
@@ -62,7 +61,7 @@ function displayContacts(con){
 
         let div = document.createElement("div");
         div.setAttribute("class", "contact-name");
-        let node = document.createTextNode(contact.name);
+        let node = document.createTextNode(contact.first_name + " " + contact.last_name);
         div.appendChild(node);
 
         div.addEventListener("click", function(){

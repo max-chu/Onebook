@@ -37,9 +37,23 @@ let profile ={
 
 let id = window.location.href.split("=")[1];
 
+let global_token;
 
-init();
-
+chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+        global_token = token;
+        if (token) {
+            fetch("http://localhost:5000/me/friendships/" + id, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }).then(res => res.json()).then(res => {
+                console.log(res);
+                profile = res;
+                init();
+            });
+        }
+});
 
 function init(){
 
@@ -94,6 +108,19 @@ function init(){
 
 
         console.log(updates);
+
+        fetch("http://localhost:5000/me/friendships/" + id, {
+            method: "PUT",
+            headers: {
+                Authorization: "Bearer " + global_token,
+                "Content-Type": 'application/json',
+            },
+            body: JSON.stringify(updates)
+        }).then(res => res.json()).then(res => {
+            console.log(res);
+            profile = res;
+            init();
+        });
     });
 
     document.getElementById("delete-button").addEventListener("click", function(){
@@ -195,19 +222,26 @@ function init(){
     document.getElementById("profile-img").setAttribute("src", profile.avatar_url);
 
     document.getElementById("input-name").value = profile.first_name + " " + profile.last_name;
-    document.getElementById("input-phone").value = profile.phonenum;
+    document.getElementById("input-phone").value = profile.phonenum.phone_num;
     document.getElementById("input-company").value = profile.company;
-    document.getElementById("input-email").value = profile.links.find((account) => account.platform === "email").username;
+    const gmail = profile.links.find((account) => account.platform === "email");
+    console.log(gmail);
+    document.getElementById("input-email").value = gmail ? gmail.username : "";
     document.getElementById("input-location").value = profile.location;
     document.getElementById("input-birthday").value = profile.birthday;
     document.getElementById("input-notes").value = profile.notes;
+    console.log(profile.notes);
 
-    document.getElementById("input-fb").value = profile.links.find((account) => account.platform === "facebook").username;
-    document.getElementById("input-li").value = profile.links.find((account) => account.platform === "linkedin").username;
-    document.getElementById("input-tw").value = profile.links.find((account) => account.platform === "twitter").username;
-    document.getElementById("input-ig").value = profile.links.find((account) => account.platform === "instagram").username;
+    const fb = profile.links.find((account) => account.platform === "facebook");
+    document.getElementById("input-fb").value = fb ? fb.username : "";
+    const li = profile.links.find((account) => account.platform === "linkedin");
+    document.getElementById("input-li").value = li ? li.username : "";
+    const tw = profile.links.find((account) => account.platform === "twitter");
+    document.getElementById("input-tw").value = tw ? tw.username : "";
+    const ig = profile.links.find((account) => account.platform === "instagram");
+    document.getElementById("input-ig").value = ig ? ig.username : "";
 
-    /*let tags = document.getElementById("tags-collapsible");
+    let tags = document.getElementById("tags-collapsible");
     for(let tag of profile.tags){
         let div = document.createElement("div");
         div.setAttribute("class", "input-section tag");
@@ -216,7 +250,7 @@ function init(){
         input.setAttribute("type", "text");
         div.appendChild(input);
         tags.prepend(div);
-    }*/
+    }
 
 
 

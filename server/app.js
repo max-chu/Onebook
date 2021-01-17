@@ -70,7 +70,7 @@ app.post("/me/contacts", contactFinder, (req, res, next) => {
     await Promise.all([
       email && models.link.create({
         friendshipId,
-        platform: 'gmail',
+        platform: 'email',
         username: email.value,
       }),
       phoneNumber && models.phonenum.create({
@@ -168,6 +168,8 @@ app.param("friendshipId", (req, res, next) => {
 app.get('/me/friendships/:friendshipId', sendContact);
 
 app.put('/me/friendships/:friendshipId', (req, res, next) => {
+  console.log("----------------------");
+  console.log(req.body.tags);
   const {first_name, last_name, birthday, company, location, avatar, notes, links, phoneNumber, tags,} = req.body;
 
   req.friendship.first_name = first_name;
@@ -179,7 +181,7 @@ app.put('/me/friendships/:friendshipId', (req, res, next) => {
   req.friendship.location = location;
   const saveFriendship = req.friendship.save();
 
-  const saveSocials = Promise.all(links.map(async ({platform, username}) => {
+  const saveSocials = links && Promise.all(links.map(async ({platform, username}) => {
     const found = await models.link.findOne({platform, friendshipId: req.params.friendshipId});
     if (found) {
       found.username = username;
@@ -193,7 +195,7 @@ app.put('/me/friendships/:friendshipId', (req, res, next) => {
     .then(docs => {
       Promise.all(docs.map(docu => docu.destroy()))
         .then(() => {
-          const saveTags = Promise.all(tags.map(tag => {
+          const saveTags = tags && Promise.all(tags.map(tag => {
             return models.tag.create({tag_name: tag, friendshipId: req.params.friendshipId});
           }))
           
@@ -248,6 +250,6 @@ app.get("/me", (req, res) => res.send(req.user.toJSON()));
 
 const PORT = process.env.PORT || 5000;
 
-sequelize.sync({force: false}).then(() => {
+sequelize.sync({force: true}).then(() => {
   app.listen(PORT, () => console.log("Running on port " + PORT));
 });

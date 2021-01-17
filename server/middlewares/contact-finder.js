@@ -2,7 +2,6 @@ const { default: axios } = require("axios");
 
 module.exports = (req, res, next) => {
   req.toImport = [];
-  console.log(req.headers.authorization.split(" ")[1]);
   if (!req.email) {
     res.status(500).send({message: "No email found"});
   } else {
@@ -12,7 +11,6 @@ module.exports = (req, res, next) => {
       }
     })
       .then(async response => {
-        console.log(response);
         let { nextPageToken } = response.data;
         req.toImport = concatData(req.toImport, response);
         while (nextPageToken) {
@@ -20,7 +18,6 @@ module.exports = (req, res, next) => {
           nextPageToken = data.data.nextPageToken;
           req.toImport = concatData(req.toImport, data);
         }
-        console.log(req.toImport);
         next();
       });
   }
