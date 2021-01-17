@@ -38,7 +38,11 @@ addButton.addEventListener('click', function(){
 });
 
 function init(){
-    displayContacts(contacts);
+    if(contacts === undefined || contacts.length < 1) {
+        document.location.href = "../welcome/welcome.html";
+    } else {
+        displayContacts(contacts);
+    }
 }
 
 function displayContacts(con){

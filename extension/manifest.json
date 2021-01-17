@@ -10,7 +10,7 @@
         "persistent": false
     },
     "page_action": {
-        "default_popup": "popup/welcome/welcome.html"
+        "default_popup": "popup/contacts/contacts.html"
     },
     "content_scripts": [
         {
