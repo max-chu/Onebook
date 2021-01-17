@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Material+Icons");
+
+/* @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../assets/Roboto.woff2') format('woff2');
+} */
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.brand {
+    font-family: 'Roboto Slab', serif;
+}
+
+.container {
+    height: 500px;
+    width: 300px;
+}
+
+
+/* Buttons */
+
+input {
+    outline: none;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    border: 3px solid;
+    border-radius: 100px;
+    padding: 6px 14px;
+
+    outline: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.btn-outline {
+    color: #092C43;
+    background-color: #fff;
+    border-color: #092C43;
+}
+
+.btn-outline:hover {
+    color: #fff;
+    background-color: #092C43;
+}
+
+.btn-fill {
+    color: #fff;
+    background-color: #092C43;
+    border-color: #092C43;
+}
+
+.btn-fill:hover {
+    background-color: #0e3a57;
+    border-color: #0e3a57;
+}
+
+.btn-fb {
+    color: #fff;
+    background-color: #1877F2;
+    border-color: #1877F2;
+}
+
+.btn-fb:hover {
+    background-color: #146adb;
+    border-color: #146adb;
+}

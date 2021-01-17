@@ -1,5 +1,75 @@
-.container {
-    height: 500px;
-    width: 300px;
-    text-align: center;
+/* Navigation Bar */
+
+.nav {
+    margin: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #092C43;
+    color: #8AB6D2;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    align-items: center;
+}
+
+input {
+    font-family: 'Roboto', sans-serif;
+}
+
+.search {
+    margin: 4px 16px;
+}
+
+#search-field {
+    background-color: #114669;
+    border: none;
+    border-radius: 100px;
+    color: #8AB6D2;
+    padding: 4px 10px;
+
+    width: 210px;
+    margin-right: 0;
+}
+
+#search-field::placeholder {
+    color: #8AB6D299;
+}
+
+#add-contact {
+    background: none;
+    border: none;
+    color: #8AB6D2;
+    margin: 0;
+    padding: 2px 8px;
+}
+
+/* List of Contacts */
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    border-bottom: 1px solid #cccccc;
+}
+
+.contact-img {
+    background: #cccccc; /* to be replaced by img */
+    width: 50px;
+    height: 50px;
+
+    margin-right: 10px;
+}
+
+.contact-name {
+    font-weight: 600;
+    font-size: 1.3em;
+    color: #092C43;
 }

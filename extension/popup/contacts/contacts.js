@@ -5,16 +5,16 @@ const contacts = [
     }
 ];
 
-chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-    console.log(token);
-  });
+// chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+//     console.log(token);
+//   });
 
 init();
 
 function init(){
     let ele = document.getElementById("contacts");
     for(let contact of contacts){
-        let button = document.createElement("button");
+        let button = document.createElement("div");
         let node = document.createTextNode(contact.first + " " + contact.last);
         button.appendChild(node);
         ele.appendChild(button);

@@ -1,5 +1,33 @@
 .container {
-    height: 500px;
-    width: 300px;
     text-align: center;
+
+    /* height: 0px;
+    margin-top: 200px;
+    margin-bottom: 200px; */
+    /* margin-bottom: 0px; */
+}
+
+.wrapper {
+    /* Vertically center */
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#logo {
+    height: 3em;
+    width: auto;
+}
+
+h3 {
+    font-weight: 300;
+}
+
+.intro-buttons {
+    margin-top: 50px;
+}
+
+#contacts-button {
+    margin-top: 6px;
 }
