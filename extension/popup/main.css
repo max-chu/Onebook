@@ -105,9 +105,28 @@ button:hover {
     border-color: #1877F2;
 }
 
+
 .btn-fb:hover {
     background-color: #146adb;
     border-color: #146adb;
+}
+
+.btn-go {
+    color: #fff;
+    /* background-color: #B31B1B;
+    border-color: #B31B1B; */
+
+    background-color: #678fa7;
+    border-color: #678fa7;
+}
+
+
+.btn-go:hover {
+    /* background-color: #a01717;
+    border-color: #a01717; */
+
+    background-color: #3F6F89;
+    border-color: #3F6F89;
 }
 
 .hidden {

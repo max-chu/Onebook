@@ -171,10 +171,31 @@ li {
 }
 
 input[type="checkbox"] {
+    cursor: pointer;
+    
     position: absolute;
     width: fit-content;
     right: 0;
     margin-right: 12px;
+}
+
+.delete-tag {
+    cursor: pointer;
+
+    position: absolute;
+    width: fit-content;
+    right: 0;
+    margin-right: 8px;
+    margin-top: 6px;
+
+    color: #ac0202;
+    font-size: 20px;
+
+    opacity: 60%;
+}
+
+.delete-tag:hover {
+    opacity: 100%;
 }
 
 #add-tag-button {
