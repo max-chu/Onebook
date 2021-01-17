@@ -18,7 +18,7 @@ let connections = [
     name: "Tom Zhu",
     notes: "",
     socials: {
-      /*linkedIn: "https://www.linkedin.com/in/zhu-tom/"*/
+      linkedIn: "https://www.linkedin.com/in/zhu-tom/",
     },
   },
 ];
@@ -46,29 +46,33 @@ function init() {
 
 function displayContact(con) {
   var body = document.getElementsByTagName("body")[0];
-  for (let i = 0; i < 1; i++) {
-    var noteNode = document.createElement("div");
-    noteNode.setAttribute("id", "contact-info");
-    noteNode.setAttribute("class", "htn-sticky-note-class");
+  var noteNode = document.createElement("div");
+  noteNode.setAttribute("id", "new-contact-message");
 
-    let button = document.createElement("button");
-    let textNode = document.createTextNode("X");
-    button.appendChild(textNode);
-    noteNode.appendChild(button);
-    body.prepend(noteNode);
+  let button = document.createElement("button");
+  let textNode = document.createTextNode("X");
+  button.appendChild(textNode);
+  noteNode.appendChild(button);
+  body.prepend(noteNode);
 
-    let p = document.createElement("p");
-    let text = document.createTextNode(con.name + " " + con.socials.linkedIn);
-    p.appendChild(text);
-    noteNode.appendChild(p);
+  let p = document.createElement("p");
+  let closeDiv = document.createElement("div");
+  let text = document.createTextNode(
+    "You already have " + con.name + " in your contacts. "
+  );
+  p.appendChild(text);
+  closeDiv.appendChild(p);
+  noteNode.appendChild(closeDiv);
 
-    noteNode.style.left = 0 + "px";
-    noteNode.style.top = 10 + "px";
+  // DISREGARD FOR NOW
+  //   let p = document.createElement("p");
+  //   let text = document.createTextNode(con.name + " " + con.socials.linkedIn);
+  //   p.appendChild(text);
+  //   noteNode.appendChild(p);
 
-    button.addEventListener("click", function () {
-      noteNode.remove();
-    });
-  }
+  button.addEventListener("click", function () {
+    noteNode.remove();
+  });
 }
 
 function promptNewContact() {
@@ -107,12 +111,12 @@ function promptNewContact() {
   logo.width = 100;
   logo.height = 100;
 
-//   imgDiv.width = 100 + "px";
-//   imgDiv.height = 100 + "px";
-//   imgDiv.getAttribute("background-image") = chrome.runtime.getURL("assets/logo.svg");
+  //   imgDiv.width = 100 + "px";
+  //   imgDiv.height = 100 + "px";
+  //   imgDiv.getAttribute("background-image") = chrome.runtime.getURL("assets/logo.svg");
 
-//   imgDiv.appendChild(logo);
-//   noteNode.appendChild(imgDiv);
+  //   imgDiv.appendChild(logo);
+  //   noteNode.appendChild(imgDiv);
 
   // if the button/X is clicked, then close the whole pop-up
   button.addEventListener("click", function () {
@@ -168,7 +172,7 @@ function promptNewContact() {
   //Put the text in the button
   existingButton.appendChild(existingText);
   //Put the button in the div
-//   existingDiv.appendChild(existingButton);
+  //   existingDiv.appendChild(existingButton);
   //Put the div on the page
   noteNode.appendChild(existingButton);
 
@@ -180,7 +184,7 @@ function promptNewContact() {
       let text = document.createTextNode(con.name);
       button.appendChild(text);
       noteNode.appendChild(button);
-    //   noteNode.appendChild(document.createElement("br"));
+      //   noteNode.appendChild(document.createElement("br"));
 
       button.addEventListener("click", function () {
         connections.find(
@@ -201,79 +205,81 @@ function promptNewContact() {
   newDiv.appendChild(newButton);
   noteNode.appendChild(newButton);
 
-  newButton.addEventListener("click", function () {
-    noteNode.innerHTML = "";
+  newButton.addEventListener("click", function () {});
 
-    let formEl = document.createElement("form");
-    formEl.setAttribute("id", "add-connection-form");
+  //************NOT NEEDED ANYMORE *****************************/
+  //     noteNode.innerHTML = "";
 
-    let genDiv = document.createElement("div");
-    genDiv.setAttribute("id", "general");
+  //     let formEl = document.createElement("form");
+  //     formEl.setAttribute("id", "add-connection-form");
 
-    let genTitle = document.createElement("h3");
-    let genText = document.createTextNode("General");
-    genTitle.appendChild(genText);
-    genDiv.appendChild(genTitle);
+  //     let genDiv = document.createElement("div");
+  //     genDiv.setAttribute("id", "general");
 
-    let username = document.createElement("input");
-    username.setAttribute("value", name);
-    username.setAttribute("id", "name");
-    username.setAttribute("name", "name");
+  //     let genTitle = document.createElement("h3");
+  //     let genText = document.createTextNode("General");
+  //     genTitle.appendChild(genText);
+  //     genDiv.appendChild(genTitle);
 
-    let notes = document.createElement("input");
-    notes.setAttribute("value", "notes");
-    notes.setAttribute("id", "notes");
-    notes.setAttribute("name", "notes");
+  //     let username = document.createElement("input");
+  //     username.setAttribute("value", name);
+  //     username.setAttribute("id", "name");
+  //     username.setAttribute("name", "name");
 
-    genDiv.appendChild(username);
-    genDiv.appendChild(notes);
-    formEl.appendChild(genDiv);
+  //     let notes = document.createElement("input");
+  //     notes.setAttribute("value", "notes");
+  //     notes.setAttribute("id", "notes");
+  //     notes.setAttribute("name", "notes");
 
-    let tagDiv = document.createElement("div");
-    tagDiv.setAttribute("id", "tags");
+  //     genDiv.appendChild(username);
+  //     genDiv.appendChild(notes);
+  //     formEl.appendChild(genDiv);
 
-    let tagTitle = document.createElement("h3");
-    let tagText = document.createTextNode("Tags");
-    tagTitle.appendChild(tagText);
-    tagDiv.appendChild(tagTitle);
-    formEl.appendChild(tagDiv);
+  //     let tagDiv = document.createElement("div");
+  //     tagDiv.setAttribute("id", "tags");
 
-    let socDiv = document.createElement("div");
-    socDiv.setAttribute("id", "tags");
+  //     let tagTitle = document.createElement("h3");
+  //     let tagText = document.createTextNode("Tags");
+  //     tagTitle.appendChild(tagText);
+  //     tagDiv.appendChild(tagTitle);
+  //     formEl.appendChild(tagDiv);
 
-    let socTitle = document.createElement("h3");
-    let socText = document.createTextNode("Socials");
-    socTitle.appendChild(socText);
-    socDiv.appendChild(socTitle);
+  //     let socDiv = document.createElement("div");
+  //     socDiv.setAttribute("id", "tags");
 
-    let socLinked = document.createElement("p");
-    let socLinkText = document.createTextNode(document.location.href);
-    socLinked.appendChild(socLinkText);
-    socDiv.appendChild(socLinked);
+  //     let socTitle = document.createElement("h3");
+  //     let socText = document.createTextNode("Socials");
+  //     socTitle.appendChild(socText);
+  //     socDiv.appendChild(socTitle);
 
-    formEl.appendChild(socDiv);
+  //     let socLinked = document.createElement("p");
+  //     let socLinkText = document.createTextNode(document.location.href);
+  //     socLinked.appendChild(socLinkText);
+  //     socDiv.appendChild(socLinked);
 
-    let add = document.createElement("button");
-    add.setAttribute("type", "submit");
-    let addText = document.createTextNode("Add Connection");
-    add.appendChild(addText);
-    formEl.appendChild(add);
+  //     formEl.appendChild(socDiv);
 
-    noteNode.appendChild(formEl);
+  //     let add = document.createElement("button");
+  //     add.setAttribute("type", "submit");
+  //     let addText = document.createTextNode("Add Connection");
+  //     add.appendChild(addText);
+  //     formEl.appendChild(add);
 
-    add.addEventListener("click", (e) => {
-      e.preventDefault();
-      newCon = {
-        name: formEl.name.value,
-        notes: formEl.notes.value,
-        socials: {
-          linkedIn: document.location.href,
-        },
-      };
-      connections.push(newCon);
-      console.log(connections);
-    });
-  });
+  //     noteNode.appendChild(formEl);
+
+  //     add.addEventListener("click", (e) => {
+  //       e.preventDefault();
+  //       newCon = {
+  //         name: formEl.name.value,
+  //         notes: formEl.notes.value,
+  //         socials: {
+  //           linkedIn: document.location.href,
+  //         },
+  //       };
+  //       connections.push(newCon);
+  //       console.log(connections);
+  //     });
+  //   });
 
   // noteNode.style.left = 0 + "px";
   // noteNode.style.top = 10 + "px";
