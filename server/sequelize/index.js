@@ -28,7 +28,7 @@ const models = [User, Address, Link, PhoneNum, Relation, Tag, Friendship];
 //       }
 //   },
 // });
-const sequelize = new Sequelize('defaultdb', 'user', 'password1234', {
+const sequelize = new Sequelize('defaultdb', 'user', process.env.NEW_DB_PASS, {
   dialect: 'postgres',
   host: "trusty-lemur-8c3.gcp-northamerica-northeast1.cockroachlabs.cloud",
   port: 26257,
