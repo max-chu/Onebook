@@ -179,12 +179,13 @@ input[type="checkbox"] {
 
 #add-tag-button {
     margin-top: 12px;
+    border-color: #092C43;
     background-color: #ffffff;
 }
 
 #add-tag-button:hover {
-    background-color: #8AB6D2;
-    border-color: #8AB6D2;
+    background-color: #092C43;
+    border-color: #092C43;
     color: #ffffff;
 }
 
