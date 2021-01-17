@@ -49,7 +49,11 @@ addButton.addEventListener('click', function(){
 });
 
 function init(){
-    displayContacts(contacts);
+    if(contacts === undefined || contacts.length < 1) {
+        document.location.href = "../welcome/welcome.html";
+    } else {
+        displayContacts(contacts);
+    }
 }
 
 function displayContacts(con){
@@ -65,7 +69,7 @@ function displayContacts(con){
         let node = document.createTextNode(contact.name);
         div.appendChild(node);
 
-        div.addEventListener("click", function(){
+        contactDiv.addEventListener("click", function(){
             window.location.href = "../profile/profile.html?contact="+contact.id;
         });
 
