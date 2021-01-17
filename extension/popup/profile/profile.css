@@ -128,12 +128,21 @@ h2 {
     padding-right: 16px;
     border: solid 0.5px #cccccc;
 
+    font-family: 'Roboto';
     font-size: 1.15em;
     letter-spacing: 0.04em;
 }
 
-textarea {
+.input-section > textarea {
     max-width: 100%;
+    height: 4em;
+    outline: none;
+    resize: none;
+}
+
+.input-section > input[type="date"] {
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 /* General */
@@ -143,4 +152,18 @@ textarea {
     height: 64px;
     background: #cccccc; /* to be replaced by img */
     border: solid 0.5px #cccccc;
+}
+
+/* Settings */
+
+#delete-button {
+    padding: none;
+    background: none;
+    color: #D40000;
+}
+
+#delete-button:hover {
+    background-color: #ac0202;
+    border-color: #ac0202;
+    color: #ffffff;
 }
