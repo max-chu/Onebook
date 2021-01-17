@@ -11,9 +11,12 @@ const contacts = [
     },
     {
         name: "Tom Zhu",
-        tags: ["backend", "second year"],
-        id: "3"
-    }
+        tags: ["backend", "second year"]
+    },
+    {
+        name: "Max Chu",
+        tags: ["backend", "first year"]
+    },
 ];
 
 // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {

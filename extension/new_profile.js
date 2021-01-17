@@ -79,7 +79,7 @@ function promptNewContact(){
 
     let noteNode = document.createElement("div");
     noteNode.setAttribute("id", "new-contact-message");
-    noteNode.setAttribute("class", "htn-sticky-note-class");
+    // noteNode.setAttribute("class", "htn-sticky-note-class");
 
     let button = document.createElement("button");
     let textNode = document.createTextNode("Close");
@@ -227,8 +227,8 @@ function promptNewContact(){
 
     });
 
-    noteNode.style.left = 0 + "px";
-    noteNode.style.top = 10 + "px";
+    // noteNode.style.left = 0 + "px";
+    // noteNode.style.top = 10 + "px";
     var body = document.getElementsByTagName("body")[0];
     body.prepend(noteNode);
 }
