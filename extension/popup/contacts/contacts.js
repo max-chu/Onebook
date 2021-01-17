@@ -1,7 +1,9 @@
 const contacts = [
     {
-        "first": "Jack",
-        "last": "Noseworthy",
+        "name": "Jack Noseworthy"
+    },
+    {
+        "name": "Scott Langille",
     }
 ];
 
@@ -11,16 +13,47 @@ const contacts = [
 
 init();
 
-function init(){
-    let ele = document.getElementById("contacts");
-    for(let contact of contacts){
-        let button = document.createElement("div");
-        let node = document.createTextNode(contact.first + " " + contact.last);
-        button.appendChild(node);
-        ele.appendChild(button);
+const form = document.getElementById("search-form");
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    displayContacts(contacts.filter((contact) => contact.name.toLowerCase().includes(form.search.value.toLowerCase())));
 
-        button.addEventListener("click", function(){
-            location.href = "../profile/profile.html"
+});
+
+const addButton = document.getElementById("add-contact");
+addButton.addEventListener('click', function(){
+    document.location.href = "../profile/profile.html";
+});
+
+function init(){
+    displayContacts(contacts);
+}
+
+function displayContacts(con){
+    let ele = document.getElementById("contacts");
+    ele.innerHTML = "";
+
+    for(let contact of con){
+        let contactDiv = document.createElement("div");
+        contactDiv.setAttribute("class", "contact");
+
+        let div = document.createElement("div");
+        div.setAttribute("class", "contact-name");
+        let node = document.createTextNode(contact.name);
+        div.appendChild(node);
+
+        div.addEventListener("click", function(){
+            document.location.href = "../profile/profile.html";
         });
+
+        let profilePic = document.createElement("img");
+        profilePic.setAttribute("src", "");
+        let picDiv = document.createElement("div");
+        picDiv.setAttribute("class", "contact-img");
+        picDiv.appendChild(profilePic);
+
+        contactDiv.appendChild(picDiv);
+        contactDiv.appendChild(div);
+        ele.appendChild(contactDiv);
     }
 }
