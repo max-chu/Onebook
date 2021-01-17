@@ -80,6 +80,8 @@ function promptNewContact() {
     .getElementsByClassName("inline t-24 t-black t-normal break-words")[0]
     .textContent.trim();
 
+  let profilePicLink = document.getElementById("ember64").src;
+
   //checks if the full name equals to a name already in the database
 
   let potentialCons = [];
