@@ -172,6 +172,10 @@ function init(){
         let clear = document.createTextNode("clear");
         i.appendChild(clear);
 
+        clear.addEventListener("click", function(){
+            // delete tag
+        });
+
         div.appendChild(input);
         div.appendChild(check);
         div.appendChild(i);
