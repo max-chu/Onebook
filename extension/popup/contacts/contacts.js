@@ -10,7 +10,11 @@ const contacts = [
     {
         name: "Tom Zhu",
         tags: ["backend", "second year"]
-    }
+    },
+    {
+        name: "Max Chu",
+        tags: ["backend", "first year"]
+    },
 ];
 
 // chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
@@ -49,7 +53,7 @@ function displayContacts(con){
         let node = document.createTextNode(contact.name);
         div.appendChild(node);
 
-        div.addEventListener("click", function(){
+        contactDiv.addEventListener("click", function(){
             document.location.href = "../profile/profile.html";
         });
 

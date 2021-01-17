@@ -25,6 +25,8 @@ body {
 .container {
     height: 500px;
     width: 300px;
+    min-height: 500px;
+    min-width: 300px;
 }
 
 ::-webkit-scrollbar {
