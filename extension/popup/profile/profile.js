@@ -124,13 +124,19 @@ function init(){
             body: JSON.stringify(updates)
         }).then(res => res.json()).then(res => {
             console.log(res);
-            profile = res;
-            init();
+            
         });
     });
 
     document.getElementById("delete-button").addEventListener("click", function(){
-        console.log("delete");
+        fetch("https://localhost:5000/me/friendships/" + id, {
+            method: "DELETE",
+        })
+            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                location.href = "../contacts/contacts.html";
+            });
     });
 
     document.getElementById("collapse-1").addEventListener("click", (e) => {
@@ -256,7 +262,7 @@ function init(){
         let div = document.createElement("div");
         div.setAttribute("class", "input-section tag");
         let input = document.createElement("input");
-        input.setAttribute("value", tag);
+        input.setAttribute("value", tag.tag_name);
         input.setAttribute("type", "text");
         input.readOnly = true;
         let check = document.createElement("input");
