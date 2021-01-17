@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require('cors');
+const path = require("path");
 const morgan = require('morgan');
 const bodyParser = require("body-parser");
 const sequelize = require("./sequelize");
@@ -15,7 +16,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 app.use(morgan("dev"));
-app.use(authParser, userFinder);
+app.use("/me", authParser, userFinder);
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/ping", (req, res) => res.send("pong!"));
 
@@ -25,31 +27,19 @@ app.get("/test", (req, res) => {
 
 const sendContact = (req, res) => {
   const {friendship} = req;
-  Promise.all([
-    friendship.getLink(),
-    friendship.getPhonenum(),
-    friendship.getAddress(),
-    friendship.getTags(),
-  ])
+  console.log(friendship);
+
+  models.friendship.findOne({
+    where: {id: friendship.id},
+    include: [models.link, models.phonenum, models.address, models.tag,],
+  })
     .then(doc => {
       console.log(doc);
       res.send(doc.toJSON());
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send({message: "error"});
-    });
-  // models.friendship.findOne({
-  //   where: {id: req.params.friendshipId},
-  //   include: [models.link, models.phonenum, models.address, models.tag,],
-  // })
-  //   .then(doc => {
-  //     console.log(doc);
-  //     res.send(doc.toJSON());
-  //   })
-  //   .catch(err => {
-  //     console.log(err);
-  //   })
+    })
 }
 
 const sendContacts = (req, res) => {
@@ -98,32 +88,79 @@ app.post("/me/contacts", contactFinder, (req, res, next) => {
     });
 }, sendContacts);
 
-app.post("/me/friendships", (req, res) => {
-  const {firstName, lastName, social, avatar } = req.body;
+app.post("/me/friendships", (req, res, next) => {
+  const {first_name, last_name, birthday, company, location, avatar_url, notes, links = [], phoneNumber, tags = [],} = req.body;
+
   models.friendship.create({
-    userId: req.user.id,
-    first_name: firstName,
-    last_name: lastName,
-    avatar_url: avatar,
+    first_name,
+    last_name,
+    avatar_url,
+    notes,
+    birthday,
+    company,
+    location,
   })
-    .then(doc => {
-      models.link.create({
-        platform: social.platform,
-        username: social.username,
-      })
-        .then(result => {
-          res.send();
+    .then((friendship) => {
+      const {id: friendshipId} = friendship; 
+      const saveSocials = links.map(({platform, username}) => {
+        models.link.create({platform, username, friendshipId})
+          .then(doc => {
+            doc.username = username;
+            return doc.save();
+          })
+          .catch(err => {
+            console.log(err);
+            res.status(500).send({message: "failed to query/update"});
+          });
+      });
+    
+      models.tag.findAll({where: {friendshipId}})
+        .then(docs => {
+          Promise.all(docs.map(docu => docu.destroy()))
+            .then(() => {
+              const saveTags = Promise.all(tags.map(tag => {
+                return model.tag.create({tag_name: tag, friendshipId});
+              }))
+              
+              const savePhonenum = phoneNumber && new Promise((resolve) => {
+                models.phonenum.find({friendshipId, phone_num, phoneNumber}).then(([phoneNum, created]) => {
+                  if (!created) {
+                    phoneNum.phone_num = phoneNumber;
+                    phoneNum.save()
+                      .then(() => {
+                        resolve();
+                      });
+                  } else {
+                    resolve();
+                  }
+                });
+              })
+    
+              Promise.all([
+                saveSocials,
+                saveTags,
+                savePhonenum,
+              ])
+                .then(() => {
+                  req.friendship = friendship;
+                  next();
+                })
+                .catch(err => {
+                  console.log(err);
+                  res.status(500).send({message: "server failed"});
+                })
+            })
+            .catch((err) => {
+              console.log(err);
+              res.status(500).send();
+            });
         })
-        .catch(err => {
-          console.log(err);
-          res.status(500).send({message: "failed to insert"});
-        });
     })
     .catch(err => {
       console.log(err);
-      res.status(500).send({message: "failed to insert"})
-    })
-})
+      res.status(500).send();
+    });
+}, sendContact);
 
 app.get("/me/friendships", sendContacts);
 
@@ -142,10 +179,10 @@ app.param("friendshipId", (req, res, next) => {
 app.get('/me/friendships/:friendshipId', sendContact);
 
 app.put('/me/friendships/:friendshipId', (req, res, next) => {
-  const {firstName, lastName, birthday, company, location, avatar, notes, socials, phoneNumber, tags,} = req.body;
+  const {first_name, last_name, birthday, company, location, avatar, notes, links, phoneNumber, tags,} = req.body;
 
-  req.friendship.first_name = firstName;
-  req.friendship.last_name = lastName;
+  req.friendship.first_name = first_name;
+  req.friendship.last_name = last_name;
   req.friendship.avatar_url = avatar;
   req.friendship.notes = notes;
   req.friendship.birthday = birthday;
@@ -153,16 +190,8 @@ app.put('/me/friendships/:friendshipId', (req, res, next) => {
   req.friendship.location = location;
   const saveFriendship = req.friendship.save();
 
-  const saveSocials = socials.map(({platform, username}) => {
-    models.link.findOrCreate({where: {platform}})
-      .then(doc => {
-        doc.username = username;
-        return doc.save();
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).send({message: "failed to query/update"});
-      });
+  const saveSocials = links.map(({platform, username}) => {
+    return models.link.upsert({platform, username});
   });
 
   models.tag.findAll({where: {friendshipId: req.params.friendshipId}})
@@ -174,9 +203,9 @@ app.put('/me/friendships/:friendshipId', (req, res, next) => {
           }))
           
           const savePhonenum = new Promise((resolve) => {
-            models.phonenum.findOrCreate({where: {friendshipId, type: phoneNumber.type}}).then(([phoneNum, created]) => {
+            models.phonenum.findOrCreate({where: {friendshipId}}).then(([phoneNum, created]) => {
               if (!created) {
-                phoneNum.phone_num = phoneNumber.value;
+                phoneNum.phone_num = phoneNumber;
                 phoneNum.save()
                   .then(() => {
                     resolve();
@@ -205,7 +234,7 @@ app.put('/me/friendships/:friendshipId', (req, res, next) => {
           console.log(err);
           res.status(500).send();
         });
-    })
+    });
   
 }, sendContact);
 

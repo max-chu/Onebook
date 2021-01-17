@@ -13,33 +13,33 @@ const Friendship = require('./models/friendship');
 const { applyAssoc } = require("./assoc");
 const models = [User, Address, Link, PhoneNum, Relation, Tag, Friendship];
 
-// const sequelize = new Sequelize('onebook', 'maxroach', '', {
-//   dialect: 'postgres',
-//   port: 26257,
-//   logging: console.log,
-//   dialectOptions: {
-//       ssl: {
-//           ca: fs.readFileSync('certs/ca.crt')
-//               .toString(),
-//           key: fs.readFileSync('certs/client.maxroach.key')
-//               .toString(),
-//           cert: fs.readFileSync('certs/client.maxroach.crt')
-//               .toString()
-//       }
-//   },
-// });
-const sequelize = new Sequelize('sugary-hyena-261.defaultdb', 'amruta', process.env.DB_PASS, {
+const sequelize = new Sequelize('bank', 'maxroach', '', {
   dialect: 'postgres',
-  host: "free-tier.gcp-us-central1.cockroachlabs.cloud",
   port: 26257,
   logging: console.log,
   dialectOptions: {
       ssl: {
-          ca: fs.readFileSync('certs/cc-ca.crt')
+          ca: fs.readFileSync('certs/ca.crt')
               .toString(),
+          key: fs.readFileSync('certs/client.maxroach.key')
+              .toString(),
+          cert: fs.readFileSync('certs/client.maxroach.crt')
+              .toString()
       }
   },
 });
+// const sequelize = new Sequelize('sugary-hyena-261.defaultdb', 'amruta', process.env.DB_PASS, {
+//   dialect: 'postgres',
+//   host: "free-tier.gcp-us-central1.cockroachlabs.cloud",
+//   port: 26257,
+//   logging: console.log,
+//   dialectOptions: {
+//       ssl: {
+//           ca: fs.readFileSync('certs/cc-ca.crt')
+//               .toString(),
+//       }
+//   },
+// });
 
 models.forEach(model => model(sequelize));
 applyAssoc(sequelize);
