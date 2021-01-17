@@ -93,6 +93,7 @@ function promptNewContact() {
 
   let button = document.createElement("button");
   let closeDiv = document.createElement("div");
+  closeDiv.id = "close-button";
   let textNode = document.createTextNode("X");
   button.appendChild(textNode);
   closeDiv.appendChild(button);
@@ -102,8 +103,16 @@ function promptNewContact() {
 
   let imgDiv = document.createElement("div");
   let logo = document.createElement("img");
-  logo.appendChild(imgDiv);
-  noteNode.appendChild(logo);
+  logo.src = chrome.runtime.getURL("assets/logo.svg");
+  logo.width = 100;
+  logo.height = 100;
+
+//   imgDiv.width = 100 + "px";
+//   imgDiv.height = 100 + "px";
+//   imgDiv.getAttribute("background-image") = chrome.runtime.getURL("assets/logo.svg");
+
+//   imgDiv.appendChild(logo);
+//   noteNode.appendChild(imgDiv);
 
   // if the button/X is clicked, then close the whole pop-up
   button.addEventListener("click", function () {
@@ -151,6 +160,7 @@ function promptNewContact() {
 
   //Create a button
   let existingButton = document.createElement("button");
+  existingButton.id = "existing-button";
   //Create some text
   let existingText = document.createTextNode("Add to existing contact");
   //Create a div
@@ -158,18 +168,19 @@ function promptNewContact() {
   //Put the text in the button
   existingButton.appendChild(existingText);
   //Put the button in the div
-  existingDiv.appendChild(existingButton);
+//   existingDiv.appendChild(existingButton);
   //Put the div on the page
-  noteNode.appendChild(existingDiv);
+  noteNode.appendChild(existingButton);
 
   existingButton.addEventListener("click", function () {
     noteNode.innerHTML = "";
     for (let con of connections) {
       let button = document.createElement("button");
+      button.className = "list-name";
       let text = document.createTextNode(con.name);
       button.appendChild(text);
       noteNode.appendChild(button);
-      noteNode.appendChild(document.createElement("br"));
+    //   noteNode.appendChild(document.createElement("br"));
 
       button.addEventListener("click", function () {
         connections.find(
@@ -183,6 +194,7 @@ function promptNewContact() {
   // (create new contact) create new contact button element
 
   let newButton = document.createElement("button");
+  newButton.id = "new-button";
   let newText = document.createTextNode("Create new contact");
   let newDiv = document.createElement("div");
   newButton.appendChild(newText);
