@@ -29,8 +29,45 @@ function init(){
         location.href = "../contacts/contacts.html"
     });
 
-    document.getElementById("save-button").addEventListener("click", function(){
-        console.log("save");
+    document.getElementById("save-button").addEventListener("click", (e) => {
+        e.preventDefault();
+        const form = document.getElementById("profile-form");
+        let updates = {};
+        if(form.name.value !== profile.name){
+            updates.name = form.name.value;
+        }
+        if(form.company.value !== profile.company){
+            updates.company = form.company.value;
+        }
+        if(form.email.value !== profile.email){
+            updates.email = form.email.value;
+        }
+        if(form.location.value !== profile.location){
+            updates.location = form.location.value;
+        }
+        if(form.birthday.value !== profile.birthday){
+            updates.birthday = form.birthday.value;
+        }
+        if(form.notes.value !== profile.notes){
+            updates.notes = form.notes.value;
+        }
+        if(form.fb.value !== profile.socials.facebook){
+            updates.fb = form.fb.value;
+        }
+        if(form.li.value !== profile.socials.linkedin){
+            updates.li = form.li.value;
+        }
+        if(form.tw.value !== profile.socials.twitter){
+            updates.tw = form.tw.value;
+        }
+        if(form.ig.value !== profile.socials.instagram){
+            updates.ig = form.ig.value;
+        }
+        console.log(updates);
+    });
+
+    document.getElementById("delete-button").addEventListener("click", function(){
+        console.log("delete");
     });
 
     document.getElementById("collapse-1").addEventListener("click", function(){
