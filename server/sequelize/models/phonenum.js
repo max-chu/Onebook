@@ -9,11 +9,11 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     phone_num: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.STRING(12),
     },
     type: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.STRING(50),
     }
   });

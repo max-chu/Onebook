@@ -20,6 +20,18 @@ module.exports = (sequelize) => {
       allowNull: true,
       type: DataTypes.STRING,
     },
+    birthday: {
+      allowNull: true,
+      type: DataTypes.STRING(12),
+    },
+    company: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
+    location: {
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
     notes: {
       allowNull: true,
       type: DataTypes.TEXT

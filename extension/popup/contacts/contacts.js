@@ -5,9 +5,9 @@ const contacts = [
     }
 ];
 
-// chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-//     console.log(token);
-//   });
+chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+    console.log(token);
+  });
 
 init();
 
