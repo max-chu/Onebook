@@ -25,22 +25,45 @@ module.exports = (req, res, next) => {
 
 function concatData(old, response) {
   return old.concat(response.data.connections.map(contact => {
-    const {familyName, givenName} = contact.names.findPrimary();
-    const {type: emailType, value} = contact.emailAddresses.findPrimary();
-    const {canonicalForm, type: phoneType} = contact.phoneNumbers.findPrimary();
-    const {value: notes} = contact.biographies.findPrimary();
+    let nfamilyName = undefined;
+    let ngivenName = undefined;
+    let nemailType = undefined;
+    let nvalue = undefined;
+    let ncanonicalForm = undefined;
+    let nphoneType = undefined;
+    let nnotes = undefined;
+
+    if(contact.names){
+      const {familyName, givenName} = contact.names.findPrimary();
+      nfamilyName=familyName;
+      ngivenName = givenName;
+    }
+    if(contact.emailAddresses){
+      const {type: emailType, value} = contact.emailAddresses.findPrimary();
+      nemailType = emailType;
+      nvalue = value;
+    }
+    if(contact.phoneNumbers){
+      const {canonicalForm, type: phoneType} = contact.phoneNumbers.findPrimary();
+      ncanonicalForm = canonicalForm;
+      nphoneType = phoneType;
+    }
+    if(contact.biographies){
+      const {value: notes} = contact.biographies.findPrimary();
+      nnotes = notes;
+    }
     return {
-      first_name: givenName,
-      last_name: familyName,
+      first_name: ngivenName,
+      last_name: nfamilyName,
       phoneNumber: {
-        phoneType,
-        value: canonicalForm,
+        nphoneType,
+        value: ncanonicalForm,
       },
       email: {
-        emailType,
-        value,
+        nemailType,
+        nvalue,
       },
-      notes,
+      nnotes,
     };
   }));
 }
