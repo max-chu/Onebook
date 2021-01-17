@@ -33,7 +33,19 @@ app.post("/contacts", authParser, contactFinder, (req, res) => {
     })
 });
 
-app.post("/users", authParser, (req, res) => {
+app.post("/me/friendships")
+
+app.get("/me/friendships")
+
+app.post('/me/friendships/:friendshipId')
+
+/* query params: 
+field - friendship, tag, link, relation, link, phonenum, address
+type 
+*/
+app.put('/me/friendships/:friendshipId')
+
+app.post("/me", authParser, (req, res) => {
   models.user.findOrCreate({where: {email: req.email}})
     .then(doc => {
       res.send(doc[0].toJSON());
