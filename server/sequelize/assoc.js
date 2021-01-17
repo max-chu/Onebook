@@ -5,7 +5,7 @@ module.exports = {
 
     friendship.hasMany(phonenum);
     friendship.hasMany(link);
-    friendship.hasMany(address);
+    friendship.hasOne(address);
     friendship.hasMany(tag);
 
     friendship.belongsToMany(friendship, {through: 'relation', as: 'friend'});
