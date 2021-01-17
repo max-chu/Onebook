@@ -41,7 +41,7 @@ let global_token;
 
 chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
         global_token = token;
-        if (token) {
+        if (token && id) {
             fetch("http://localhost:5000/me/friendships/" + id, {
                 method: "GET",
                 headers: {
@@ -115,17 +115,31 @@ function init(){
 
         console.log(updates);
 
-        fetch("http://localhost:5000/me/friendships/" + id, {
-            method: "PUT",
-            headers: {
-                Authorization: "Bearer " + global_token,
-                "Content-Type": 'application/json',
-            },
-            body: JSON.stringify(updates)
-        }).then(res => res.json()).then(res => {
-            console.log(res);
-            
-        });
+        if (id) {
+            fetch("http://localhost:5000/me/friendships/" + id, {
+                method: "PUT",
+                headers: {
+                    Authorization: "Bearer " + global_token,
+                    "Content-Type": 'application/json',
+                },
+                body: JSON.stringify(updates)
+            }).then(res => res.json()).then(res => {
+                console.log(res);
+                
+            });
+        } else {
+            fetch("http://localhost:5000/me/friendships", {
+                method: "POST",
+                headers: {
+                    Authorization: "Bearer " + global_token,
+                    "Content-Type": 'application/json',
+                },
+                body: JSON.stringify(updates)
+            }).then(res => res.json()).then(res => {
+                console.log(res);
+            });
+        }
+        
     });
 
     document.getElementById("delete-button").addEventListener("click", function(){

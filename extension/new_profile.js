@@ -23,9 +23,30 @@ let connections = [
   },
 ];
 
+let global_token;
+
+chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+  if (token) {
+    global_token = token;
+    fetch("http://localhost:5000/me/friendships", {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token
+        }
+    }).then(res => res.json()).then(res => {
+        connections = res;
+        init();
+    });
+  }
+});
 
 
-init();
+chrome.runtime.onMessage.addListener(
+  (request, _, sendResponse) => {
+    if (request.action == "token") {  // Delete All Notes on the Page
+      console.log(request.token);
+    }
+  });
 
 // Initialize original
 
@@ -60,7 +81,7 @@ function displayContact(con) {
   let p = document.createElement("p");
   let closeDiv = document.createElement("div");
   let text = document.createTextNode(
-    "You already have " + con.name + " in your contacts. "
+    "You already have " + con.first_name + " " + con.last_name + " in your contacts. "
   );
   p.appendChild(text);
   closeDiv.appendChild(p);
@@ -88,7 +109,7 @@ function promptNewContact() {
 
   let potentialCons = [];
   for (let con of connections) {
-    if (con.name === name) {
+    if (con.first_name + " " + con.last_name === name) {
       potentialCons.push(con);
     }
   }
@@ -185,16 +206,22 @@ function promptNewContact() {
     for (let con of connections) {
       let button = document.createElement("button");
       button.className = "list-name";
-      let text = document.createTextNode(con.name);
+      let text = document.createTextNode(con.first_name + " " + con.last_name);
       button.appendChild(text);
       noteNode.appendChild(button);
       //   noteNode.appendChild(document.createElement("br"));
 
       button.addEventListener("click", function () {
-        connections.find(
-          (contact) => contact.name === con.name
-        ).socials.linkedIn = document.location.href;
+        const cont = connections.find((contact) => contact.first_name + " " + contact.last_name === con.first_name + " " + con.last_name);
         console.log(connections);
+        fetch("http://localhost:5000/me/friendships/" + cont.id + "/links", {
+          method: "PUT",
+          headers: {
+            Authorization: "Bearer " + global_token,
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({platform: 'linkedin', username: document.location.href})
+        })
       });
     }
   });
@@ -209,7 +236,17 @@ function promptNewContact() {
   newDiv.appendChild(newButton);
   noteNode.appendChild(newButton);
 
-  newButton.addEventListener("click", function () {});
+  newButton.addEventListener("click", function () {
+    const [first_name, last_name] = name.split(" ");
+    fetch("http://localhost:5000/me/friendship", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + global_token,
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({first_name, last_name, links: [{platform: "linkedin", username: document.location.href}]})
+    })
+  });
 
   //************NOT NEEDED ANYMORE *****************************/
   //     noteNode.innerHTML = "";

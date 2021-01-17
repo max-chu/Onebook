@@ -45,7 +45,7 @@ const sendContact = (req, res) => {
 const sendContacts = (req, res) => {
   models.friendship.findAll({
     where: {userId: req.user.id},
-    include: models.tag,
+    include: [models.tag, models.link],
   })
     .then(docs => {
       docs = docs.map(doc => doc.toJSON());
@@ -57,6 +57,24 @@ const sendContacts = (req, res) => {
       res.status(500).send({message: "Failed to query"});
     });
 }
+
+app.put("/me/friendships/:friendshipId/links", (req, res) => {
+  const {platform, username} = req.body;
+  models.link.findOne({where: {friendshipId: req.params.friendshipId, platform}})
+    .then(doc => {
+      if (doc) {
+        doc.username = username;
+        doc.save().then(() => {
+          res.send();
+        });
+      } else {
+        models.link.create({friendshipId: req.params.friendshipId, platform, username})
+          .then(() => {
+            res.send();
+          });
+      }
+    })
+})
 
 app.post("/me/contacts", contactFinder, (req, res, next) => {
   Promise.all(req.toImport.map(async ({phoneNumber, first_name, last_name, email, notes}) => {
